@@ -1,41 +1,29 @@
-import { Mail, Zap, BarChart3, Calendar, Shield, Boxes } from "lucide-react";
+import { Radio, Blocks, Cloud, Users } from "lucide-react";
 
 const features = [
   {
-    icon: Mail,
-    title: "Email & SMS Automation",
-    description: "Create intelligent flows for cart abandonment, post-purchase engagement, and re-activation campaigns.",
+    icon: Radio,
+    title: "Smart Broadcasts",
+    description: "Send campaigns to thousands of customers in minutes. Track in real-time: delivered, seen, clicked. Know exactly what works.",
     color: "text-primary",
   },
   {
-    icon: Boxes,
-    title: "E-commerce Integrations",
-    description: "Seamlessly connect with Shopify, WooCommerce, Magento, and custom stores via powerful APIs.",
+    icon: Blocks,
+    title: "No-Code Automations",
+    description: "Build sales, support, and engagement flows by dragging and dropping. Zero programming, results in minutes. Serve customers 24/7 on autopilot.",
     color: "text-secondary",
   },
   {
-    icon: BarChart3,
-    title: "Analytics Dashboard",
-    description: "Visualize recovered revenue, LTV growth, conversion rates, and campaign performance in real-time.",
+    icon: Cloud,
+    title: "Official WhatsApp API",
+    description: "Direct connection to Meta Cloud API. No ban risk, no instability. Operate in 180+ countries with full security and compliance.",
     color: "text-success",
   },
   {
-    icon: Calendar,
-    title: "Campaign Management",
-    description: "Schedule sends, segment audiences, and manage multi-channel campaigns from one unified interface.",
+    icon: Users,
+    title: "Unlimited Team, One Number",
+    description: "Add as many agents as you need. Assign conversations, monitor performance, scale your support without losing control.",
     color: "text-primary",
-  },
-  {
-    icon: Shield,
-    title: "Secure & Compliant",
-    description: "Enterprise-grade security with GDPR compliance, data encryption, and 99.9% deliverability rates.",
-    color: "text-secondary",
-  },
-  {
-    icon: Zap,
-    title: "Fast Onboarding",
-    description: "Get started in minutes with intuitive UI, pre-built templates, and dedicated support team.",
-    color: "text-success",
   },
 ];
 
@@ -47,23 +35,23 @@ const FeaturesSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 shadow-soft">
             <span className="text-sm font-medium text-accent-foreground">
-              Powerful Features
+              Why Choose Convertfy
             </span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
             Everything you need to
             <span className="block gradient-primary bg-clip-text text-transparent">
-              grow your business
+              scale WhatsApp sales
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our all-in-one platform combines powerful automation, deep analytics, and seamless integrations
-            to help you maximize revenue and customer lifetime value.
+            Built for serious dropshippers. No-code tools, official API, and unlimited team management
+            to help you grow without limits.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Features Grid - 2x2 Layout */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -95,10 +83,10 @@ const FeaturesSection = () => {
         {/* Bottom CTA */}
         <div className="mt-16 text-center animate-fade-in">
           <p className="text-muted-foreground mb-4">
-            Want to see how it all works together?
+            Ready to scale your WhatsApp sales?
           </p>
           <button className="text-primary font-semibold hover:underline underline-offset-4 transition-smooth">
-            Explore full feature list →
+            Start your free trial →
           </button>
         </div>
       </div>
