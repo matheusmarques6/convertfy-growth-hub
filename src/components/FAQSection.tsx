@@ -34,22 +34,22 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-[#020617]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 shadow-soft">
-            <span className="text-sm font-medium text-accent-foreground">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft">
+            <span className="text-sm font-medium text-white/90">
               FAQ
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Frequently asked
             <span className="block gradient-primary bg-clip-text text-transparent">
               questions
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-white/70">
             Got questions? We've got answers. Can't find what you're looking for? Contact our support team.
           </p>
         </div>
@@ -61,12 +61,12 @@ const FAQSection = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-card rounded-xl border border-border shadow-soft hover:shadow-medium transition-smooth px-6"
+                className="bg-white/5 rounded-xl border border-white/10 shadow-soft hover:shadow-medium transition-smooth px-6"
               >
-                <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary py-6">
+                <AccordionTrigger className="text-left font-semibold text-white hover:text-primary py-6">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pb-6">
+                <AccordionContent className="text-white/70 leading-relaxed pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -76,11 +76,11 @@ const FAQSection = () => {
 
         {/* Contact Support */}
         <div className="mt-16 text-center animate-fade-in">
-          <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-accent border border-border shadow-soft">
-            <h3 className="text-xl font-bold text-foreground">
+          <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-white/5 border border-white/10 shadow-soft">
+            <h3 className="text-xl font-bold text-white">
               Still have questions?
             </h3>
-            <p className="text-muted-foreground max-w-md">
+            <p className="text-white/70 max-w-md">
               Our team is here to help. Get in touch and we'll respond within 24 hours.
             </p>
             <button className="px-6 py-3 gradient-primary text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth">
