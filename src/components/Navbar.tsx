@@ -50,7 +50,7 @@ const Navbar = () => {
             <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-soft group-hover:shadow-medium transition-smooth">
               <span className="text-white font-bold text-xl">C</span>
             </div>
-            <span className="text-xl font-bold text-foreground hidden sm:block">
+            <span className="text-xl font-bold text-white hidden sm:block">
               Convertfy CRM
             </span>
           </button>
@@ -129,7 +129,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
