@@ -24,9 +24,9 @@ const HeroSection = () => {
       style={{ backgroundColor: '#020617' }}
     >
       {/* Google Gemini Effect - Neon Lines in Bottom Half */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Hero Content - Top Half */}
-        <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 space-y-8 mb-24">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-visible">
+        {/* Hero Content - Centered */}
+        <div className="flex flex-col items-center justify-center gap-6 relative z-20 text-center px-4">
           {/* Title */}
           <h1 className="text-[64px] md:text-[72px] font-bold text-white leading-tight tracking-tight">
             All-in-One CRM Platform
@@ -44,7 +44,7 @@ const HeroSection = () => {
         </div>
 
         {/* Neon Lines - Bottom Half */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 z-10">
+        <div className="absolute bottom-0 left-0 right-0 h-[45vh] md:h-[40vh] min-h-[350px] z-10 overflow-visible">
           <GoogleGeminiEffect
             pathLengths={[
               pathLengthFirst,
