@@ -3,22 +3,22 @@ import { Radio, Blocks, Cloud, Users } from "lucide-react";
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="bg-background py-16 md:py-32">
+    <section id="features" className="bg-[#020617] py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 shadow-soft">
-            <span className="text-sm font-medium text-accent-foreground">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft">
+            <span className="text-sm font-medium text-white/90">
               Why Choose Convertfy
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Everything you need to
             <span className="block gradient-primary bg-clip-text text-transparent">
               scale WhatsApp sales
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-white/70">
             Built for serious dropshippers. No-code tools, official API, and unlimited team management
             to help you grow without limits.
           </p>
@@ -174,7 +174,7 @@ const FeaturesSection = () => {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center animate-fade-in">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-white/70 mb-4">
             Ready to scale your WhatsApp sales?
           </p>
           <button className="text-primary font-semibold hover:underline underline-offset-4 transition-smooth">
