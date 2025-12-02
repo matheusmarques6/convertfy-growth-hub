@@ -27,7 +27,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 gradient-hero -z-20" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 gradient-glow -z-20 animate-glow" />
 
-      {/* Google Gemini Effect - Scroll-Driven Animation */}
+      {/* Google Gemini Effect - Scroll-Driven Animation with CRM Content */}
       <GoogleGeminiEffect
         pathLengths={[
           pathLengthFirst,
@@ -36,13 +36,29 @@ const HeroSection = () => {
           pathLengthFourth,
           pathLengthFifth,
         ]}
-        hideTitle={true}
-        className="pointer-events-none opacity-40 -z-10"
+        title="All-in-One CRM Platform"
+        description="Recover abandoned carts, increase LTV, automate your marketing — scroll to see the magic"
       />
       
-      {/* Hero Content - Sticky Overlay */}
-      <div className="sticky top-0 h-screen flex items-center z-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+      {/* Original Hero Content - Below Animation */}
+      <div className="sticky top-0 h-screen flex items-center z-20 pointer-events-none">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 pointer-events-auto">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="hero" size="xl" className="group">
+              Start Free Trial
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-smooth" />
+            </Button>
+            <Button variant="outline" size="xl" className="group">
+              <Play className="w-5 h-5 mr-2" />
+              Watch Demo
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Detailed Hero Content Section - After Animation */}
+      <div className="relative bg-background py-20 z-30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="space-y-8 animate-fade-in">
@@ -52,20 +68,6 @@ const HeroSection = () => {
                 <span className="text-sm font-medium text-accent-foreground">
                   #1 CRM for E-commerce Growth
                 </span>
-              </div>
-
-              {/* Headline */}
-              <div className="space-y-4">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-                  All-in-One
-                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-                    CRM Platform
-                  </span>
-                </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed max-w-xl">
-                  Recover abandoned carts, increase LTV, automate your marketing — all in one place.
-                  Transform your e-commerce business with intelligent automation.
-                </p>
               </div>
 
               {/* Trust Indicators */}
@@ -82,18 +84,6 @@ const HeroSection = () => {
                   <CheckCircle2 className="w-5 h-5 text-success" />
                   <span className="text-sm text-muted-foreground">Cancel anytime</span>
                 </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="hero" size="xl" className="group">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-smooth" />
-                </Button>
-                <Button variant="outline" size="xl" className="group">
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch Demo
-                </Button>
               </div>
 
               {/* Social Proof */}
