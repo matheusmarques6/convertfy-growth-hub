@@ -22,7 +22,7 @@ export const GoogleGeminiEffect = ({
   hideTitle?: boolean;
 }) => {
   return (
-    <div className={cn("sticky top-0 h-screen flex items-center justify-center", className)}>
+    <div className={cn(hideTitle ? "absolute inset-0" : "sticky top-0 h-screen flex items-center justify-center", className)}>
       {!hideTitle && (
         <>
           <p className="text-lg md:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300">
