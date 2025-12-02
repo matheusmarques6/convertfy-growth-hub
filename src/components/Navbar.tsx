@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu as MenuIcon, X } from "lucide-react";
+import { Menu, MenuItem, HoveredLink } from "@/components/ui/navbar-menu";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,16 +56,65 @@ const Navbar = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-smooth"
-              >
-                {link.label}
-              </button>
-            ))}
+          <div className="hidden lg:flex items-center">
+            <Menu setActive={setActive}>
+              <MenuItem setActive={setActive} active={active} item="Home">
+                <div className="flex flex-col space-y-4 text-sm">
+                  <HoveredLink onClick={() => scrollToSection("home")}>
+                    Overview
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("features")}>
+                    Quick Features
+                  </HoveredLink>
+                </div>
+              </MenuItem>
+              <MenuItem setActive={setActive} active={active} item="Features">
+                <div className="flex flex-col space-y-4 text-sm">
+                  <HoveredLink onClick={() => scrollToSection("features")}>
+                    Email & SMS Automation
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("features")}>
+                    E-commerce Integrations
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("features")}>
+                    Analytics Dashboard
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("features")}>
+                    Campaign Management
+                  </HoveredLink>
+                </div>
+              </MenuItem>
+              <MenuItem setActive={setActive} active={active} item="How It Works">
+                <div className="flex flex-col space-y-4 text-sm">
+                  <HoveredLink onClick={() => scrollToSection("how-it-works")}>
+                    Step-by-Step Guide
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("how-it-works")}>
+                    Integration Process
+                  </HoveredLink>
+                </div>
+              </MenuItem>
+              <MenuItem setActive={setActive} active={active} item="Pricing">
+                <div className="flex flex-col space-y-4 text-sm">
+                  <HoveredLink onClick={() => scrollToSection("pricing")}>
+                    View Plans
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("pricing")}>
+                    Compare Features
+                  </HoveredLink>
+                </div>
+              </MenuItem>
+              <MenuItem setActive={setActive} active={active} item="Testimonials">
+                <div className="flex flex-col space-y-4 text-sm">
+                  <HoveredLink onClick={() => scrollToSection("testimonials")}>
+                    Customer Stories
+                  </HoveredLink>
+                  <HoveredLink onClick={() => scrollToSection("testimonials")}>
+                    Success Metrics
+                  </HoveredLink>
+                </div>
+              </MenuItem>
+            </Menu>
           </div>
 
           {/* CTA Buttons */}
@@ -81,7 +132,7 @@ const Navbar = () => {
             className="lg:hidden p-2 text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
           </button>
         </div>
       </div>
