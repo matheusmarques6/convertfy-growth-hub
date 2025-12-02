@@ -37,11 +37,11 @@ const HeroSection = () => {
           pathLengthFifth,
         ]}
         hideTitle={true}
-        className="pointer-events-none opacity-40"
+        className="pointer-events-none opacity-40 -z-10"
       />
       
       {/* Hero Content - Sticky Overlay */}
-      <div className="sticky top-0 h-screen flex items-center z-20 -mt-[100vh]">
+      <div className="sticky top-0 h-screen flex items-center z-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
