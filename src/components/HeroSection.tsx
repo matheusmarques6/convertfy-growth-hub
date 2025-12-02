@@ -29,7 +29,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center justify-center gap-6 relative z-20 text-center px-4">
           {/* Title */}
           <h1 className="text-[64px] md:text-[72px] font-bold text-white leading-tight tracking-tight">
-            All-in-One CRM Platform
+            All-in-One
           </h1>
           
           {/* Subtitle */}
