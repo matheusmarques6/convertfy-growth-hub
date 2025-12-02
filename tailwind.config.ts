@@ -100,6 +100,9 @@ export default {
         "slide-in-right": "slide-in-right 0.5s ease-out",
         "glow": "glow 3s ease-in-out infinite",
       },
+      animationDelay: {
+        "200": "200ms",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
