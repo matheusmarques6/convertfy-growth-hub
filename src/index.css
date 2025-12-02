@@ -79,6 +79,7 @@
     
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 91% 70%;
     
     --secondary: 243 75% 59%;
     --secondary-foreground: 0 0% 100%;
@@ -86,12 +87,22 @@
     --accent: 222 47% 20%;
     --accent-foreground: 217 91% 60%;
     
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
     
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 217 91% 60%;
+    
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 15%) 0%, hsl(222 47% 11%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(217 91% 60% / 0.2) 0%, transparent 70%);
   }
 }
 

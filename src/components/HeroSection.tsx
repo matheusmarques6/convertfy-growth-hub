@@ -21,26 +21,29 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={ref}
-      className="relative h-[400vh] overflow-hidden"
+      className="relative h-[300vh] overflow-hidden"
     >
-      {/* Google Gemini Effect */}
-      <GoogleGeminiEffect
-        pathLengths={[
-          pathLengthFirst,
-          pathLengthSecond,
-          pathLengthThird,
-          pathLengthFourth,
-          pathLengthFifth,
-        ]}
-        title="All-in-One CRM Platform"
-        description="Recover abandoned carts, increase LTV, automate your marketing — all in one place"
-      />
-      
       {/* Background Gradient */}
       <div className="absolute inset-0 gradient-hero -z-20" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 gradient-glow -z-20 animate-glow" />
+
+      {/* Google Gemini Effect - Behind Content */}
+      <div className="absolute inset-0 -z-10">
+        <GoogleGeminiEffect
+          pathLengths={[
+            pathLengthFirst,
+            pathLengthSecond,
+            pathLengthThird,
+            pathLengthFourth,
+            pathLengthFifth,
+          ]}
+          title="All-in-One CRM Platform"
+          description="Recover abandoned carts, increase LTV, automate your marketing — all in one place"
+          className="opacity-50"
+        />
+      </div>
       
-      <div className="sticky top-0 min-h-screen flex items-center">
+      <div className="sticky top-0 min-h-screen flex items-center z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
@@ -107,7 +110,7 @@ const HeroSection = () => {
             </div>
 
             {/* Right Column - Dashboard Mockup */}
-            <div className="relative animate-fade-in animation-delay-200">
+            <div className="relative animate-fade-in">
               <div className="relative rounded-2xl overflow-hidden shadow-strong border border-border bg-card">
                 {/* Mockup Header */}
                 <div className="bg-muted px-4 py-3 border-b border-border flex items-center gap-2">
