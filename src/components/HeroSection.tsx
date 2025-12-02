@@ -21,29 +21,27 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={ref}
-      className="relative h-[300vh] overflow-hidden"
+      className="relative h-[300vh]"
     >
-      {/* Background Gradient */}
+      {/* Background Gradient - Furthest Back */}
       <div className="absolute inset-0 gradient-hero -z-20" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 gradient-glow -z-20 animate-glow" />
 
-      {/* Google Gemini Effect - Behind Content */}
-      <div className="absolute inset-0 -z-10">
-        <GoogleGeminiEffect
-          pathLengths={[
-            pathLengthFirst,
-            pathLengthSecond,
-            pathLengthThird,
-            pathLengthFourth,
-            pathLengthFifth,
-          ]}
-          title="All-in-One CRM Platform"
-          description="Recover abandoned carts, increase LTV, automate your marketing — all in one place"
-          className="opacity-50"
-        />
-      </div>
+      {/* Google Gemini Effect - Scroll-Driven Animation */}
+      <GoogleGeminiEffect
+        pathLengths={[
+          pathLengthFirst,
+          pathLengthSecond,
+          pathLengthThird,
+          pathLengthFourth,
+          pathLengthFifth,
+        ]}
+        hideTitle={true}
+        className="pointer-events-none opacity-40"
+      />
       
-      <div className="sticky top-0 min-h-screen flex items-center z-10">
+      {/* Hero Content - Sticky Overlay */}
+      <div className="sticky top-0 h-screen flex items-center z-20 -mt-[100vh]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
