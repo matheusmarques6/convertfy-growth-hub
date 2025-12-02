@@ -58,22 +58,22 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="py-24 bg-gradient-to-b from-background to-accent/20">
+    <section id="pricing" className="py-24 bg-[#020617]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 shadow-soft">
-            <span className="text-sm font-medium text-accent-foreground">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft">
+            <span className="text-sm font-medium text-white/90">
               Simple Pricing
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Choose the perfect plan
             <span className="block gradient-primary bg-clip-text text-transparent">
               for your business
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-white/70">
             All plans include 14-day free trial. No credit card required. Cancel anytime.
           </p>
         </div>
@@ -83,10 +83,10 @@ const PricingSection = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative bg-card rounded-2xl p-8 shadow-soft border transition-smooth animate-fade-in ${
+              className={`relative bg-white/5 rounded-2xl p-8 shadow-soft border transition-smooth animate-fade-in ${
                 plan.popular
                   ? "border-primary shadow-medium scale-105 lg:scale-110"
-                  : "border-border hover:border-primary/20 hover:shadow-medium"
+                  : "border-white/10 hover:border-primary/20 hover:shadow-medium"
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -102,17 +102,17 @@ const PricingSection = () => {
 
               {/* Plan Header */}
               <div className="mb-6">
-                <h3 className="text-2xl font-bold text-foreground mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   {plan.name}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-6">
+                <p className="text-sm text-white/70 mb-6">
                   {plan.description}
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-foreground">
+                  <span className="text-5xl font-bold text-white">
                     {plan.price}
                   </span>
-                  <span className="text-muted-foreground">
+                  <span className="text-white/70">
                     {plan.period}
                   </span>
                 </div>
@@ -122,14 +122,14 @@ const PricingSection = () => {
               <Button
                 variant={plan.popular ? "hero" : "outline"}
                 size="lg"
-                className="w-full mb-8"
+                className={`w-full mb-8 ${!plan.popular ? "border-white/20 text-white hover:bg-white/10" : ""}`}
               >
                 {plan.cta}
               </Button>
 
               {/* Features List */}
               <div className="space-y-4">
-                <div className="text-sm font-semibold text-foreground mb-4">
+                <div className="text-sm font-semibold text-white mb-4">
                   What's included:
                 </div>
                 {plan.features.map((feature, featureIndex) => (
@@ -137,7 +137,7 @@ const PricingSection = () => {
                     <div className="mt-0.5">
                       <Check className="w-5 h-5 text-success" />
                     </div>
-                    <span className="text-sm text-muted-foreground flex-1">
+                    <span className="text-sm text-white/70 flex-1">
                       {feature}
                     </span>
                   </div>
@@ -149,7 +149,7 @@ const PricingSection = () => {
 
         {/* FAQ Link */}
         <div className="mt-16 text-center animate-fade-in">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-white/70 mb-4">
             Have questions about pricing or features?
           </p>
           <button className="text-primary font-semibold hover:underline underline-offset-4 transition-smooth">

@@ -35,22 +35,22 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" className="py-24 bg-gradient-to-b from-accent/20 to-background">
+    <section id="how-it-works" className="py-24 bg-[#020617]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 shadow-soft">
-            <span className="text-sm font-medium text-accent-foreground">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft">
+            <span className="text-sm font-medium text-white/90">
               Simple Process
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Get started in
             <span className="block gradient-primary bg-clip-text text-transparent">
               5 easy steps
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-white/70">
             From setup to success in minutes. Our streamlined workflow gets you up and running fast,
             so you can focus on growing your business.
           </p>
@@ -74,13 +74,13 @@ const HowItWorksSection = () => {
                   {/* Step Content */}
                   <div className={`flex-1 ${isEven ? "lg:text-right" : "lg:text-left"}`}>
                     <div className="inline-block">
-                      <div className="text-6xl font-bold text-primary/10 mb-2">
+                      <div className="text-6xl font-bold text-primary/30 mb-2">
                         {step.number}
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-3">
+                      <h3 className="text-2xl font-bold text-white mb-3">
                         {step.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed max-w-md">
+                      <p className="text-white/70 leading-relaxed max-w-md">
                         {step.description}
                       </p>
                     </div>
@@ -108,12 +108,12 @@ const HowItWorksSection = () => {
 
         {/* Bottom CTA */}
         <div className="mt-20 text-center animate-fade-in">
-          <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center p-8 rounded-2xl bg-card border border-border shadow-soft">
+          <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center p-8 rounded-2xl bg-white/5 border border-white/10 shadow-soft">
             <div className="text-left">
-              <h3 className="text-xl font-bold text-foreground mb-2">
+              <h3 className="text-xl font-bold text-white mb-2">
                 Ready to get started?
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-white/70">
                 Join thousands of brands already using Convertfy
               </p>
             </div>
