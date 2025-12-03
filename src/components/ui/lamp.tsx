@@ -13,43 +13,43 @@ export const LampContainer = ({
   return (
     <div
       className={cn(
-        "relative flex flex-col items-center justify-center overflow-hidden bg-[#020617] w-full py-20",
+        "relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#020617] py-20",
         className
       )}
     >
-      {/* Lamp Light Effect */}
-      <div className="relative w-full flex flex-col items-center">
-        {/* Horizontal Light Bar */}
+      {/* Lamp Light Effect - Centered */}
+      <div className="relative w-full flex flex-col items-center justify-center">
+        {/* Solid LED Light Bar */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0.5 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10"
+          className="relative z-10 flex justify-center"
         >
           <div 
-            className="w-[200px] sm:w-[300px] md:w-[400px] h-[3px] rounded-full bg-gradient-to-r from-transparent via-[#00d4ff] to-transparent animate-lamp-pulse"
+            className="w-[50vw] max-w-[500px] min-w-[200px] h-[6px] rounded bg-[#00d4ff] animate-lamp-pulse"
             style={{
-              boxShadow: '0 0 20px 5px rgba(0, 212, 255, 0.6), 0 0 60px 20px rgba(0, 212, 255, 0.4), 0 0 100px 40px rgba(0, 212, 255, 0.2)'
+              boxShadow: '0 0 20px 5px rgba(0, 212, 255, 0.8), 0 0 60px 20px rgba(0, 212, 255, 0.4), 0 0 120px 50px rgba(0, 212, 255, 0.2)'
             }}
           />
         </motion.div>
 
-        {/* Light Cone/Glow spreading downward - smooth gradient only */}
+        {/* Light Cone spreading downward */}
         <motion.div
           initial={{ opacity: 0, scaleY: 0 }}
           whileInView={{ opacity: 1, scaleY: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="absolute top-0 w-[500px] sm:w-[600px] md:w-[800px] h-[300px] origin-top"
+          className="absolute top-[6px] left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] h-[350px] origin-top pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
+            background: 'radial-gradient(ellipse 60% 100% at 50% 0%, rgba(0, 212, 255, 0.3) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%)',
           }}
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-20 mt-8">
+      {/* Content - Centered */}
+      <div className="relative z-20 mt-12 w-full flex flex-col items-center justify-center text-center px-4">
         {children}
       </div>
     </div>
