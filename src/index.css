@@ -156,4 +156,34 @@
   .transition-bounce {
     transition: var(--transition-bounce);
   }
+  
+  /* Lamp pulse animation */
+  @keyframes lamp-pulse {
+    0%, 100% { 
+      opacity: 0.8; 
+      filter: brightness(1);
+    }
+    50% { 
+      opacity: 1; 
+      filter: brightness(1.2);
+    }
+  }
+  
+  .animate-lamp-pulse {
+    animation: lamp-pulse 3s ease-in-out infinite;
+  }
+  
+  /* Text glow animation */
+  @keyframes text-glow {
+    0%, 100% { 
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3);
+    }
+    50% { 
+      text-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 60px rgba(0, 212, 255, 0.4);
+    }
+  }
+  
+  .animate-text-glow {
+    animation: text-glow 3s ease-in-out infinite;
+  }
 }
