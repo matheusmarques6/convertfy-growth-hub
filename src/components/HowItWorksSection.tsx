@@ -1,5 +1,5 @@
 import { ShoppingCart, MessageCircle, Zap, Rocket, BarChart3 } from "lucide-react";
-import { ElegantShape } from "@/components/ui/elegant-shape";
+import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -35,65 +35,88 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
+  const title1 = "Get started in";
+  const title2 = "5 easy steps";
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        delay: i * 0.04,
+        ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
+      },
+    }),
+  };
+
   return (
     <section id="how-it-works" className="py-24 bg-[#020617]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header with Floating Shapes */}
-        <div className="relative text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in overflow-hidden py-8">
-          {/* Floating Shapes - positioned around the header */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <ElegantShape
-              delay={0.3}
-              width={300}
-              height={70}
-              rotate={12}
-              gradient="from-indigo-500/[0.15]"
-              className="left-[-15%] md:left-[-5%] top-[10%]"
-            />
-            <ElegantShape
-              delay={0.5}
-              width={250}
-              height={60}
-              rotate={-15}
-              gradient="from-rose-500/[0.15]"
-              className="right-[-10%] md:right-[0%] top-[60%]"
-            />
-            <ElegantShape
-              delay={0.4}
-              width={150}
-              height={40}
-              rotate={-8}
-              gradient="from-violet-500/[0.15]"
-              className="left-[5%] md:left-[10%] bottom-[5%]"
-            />
-            <ElegantShape
-              delay={0.6}
-              width={120}
-              height={35}
-              rotate={20}
-              gradient="from-amber-500/[0.15]"
-              className="right-[10%] md:right-[15%] top-[5%]"
-            />
-          </div>
-
-          {/* Content */}
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft">
-              <span className="text-sm font-medium text-white/90">
-                Simple Process
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mt-4">
-              Get started in
-              <span className="block gradient-primary bg-clip-text text-transparent">
-                5 easy steps
-              </span>
-            </h2>
-            <p className="text-lg text-white/70 mt-4">
-              From setup to success in minutes. Our streamlined workflow gets you up and running fast,
-              so you can focus on growing your business.
-            </p>
-          </div>
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft mb-6"
+          >
+            <span className="text-sm font-medium text-white/90">
+              Simple Process
+            </span>
+          </motion.div>
+          
+          {/* Animated Title */}
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+            {/* First line - white */}
+            <span className="block text-white mb-2">
+              {title1.split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={letterVariants}
+                  className="inline-block"
+                  style={{ display: char === " " ? "inline" : "inline-block" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </span>
+            
+            {/* Second line - italic with gradient */}
+            <span className="block italic">
+              {title2.split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  custom={i + title1.length}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={letterVariants}
+                  className="inline-block bg-gradient-to-r from-primary via-[hsl(230,80%,70%)] to-secondary bg-clip-text text-transparent"
+                  style={{ display: char === " " ? "inline" : "inline-block" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </span>
+          </h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="text-lg text-white/70 mt-6 max-w-xl mx-auto"
+          >
+            From setup to success in minutes. Our streamlined workflow gets you up and running fast,
+            so you can focus on growing your business.
+          </motion.p>
         </div>
 
         {/* Steps Timeline */}
@@ -104,12 +127,15 @@ const HowItWorksSection = () => {
               const isEven = index % 2 === 0;
               
               return (
-                <div
+                <motion.div
                   key={index}
-                  className={`flex flex-col lg:flex-row gap-8 items-center animate-fade-in ${
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`flex flex-col lg:flex-row gap-8 items-center ${
                     isEven ? "" : "lg:flex-row-reverse"
                   }`}
-                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Step Content */}
                   <div className={`flex-1 ${isEven ? "lg:text-right" : "lg:text-left"}`}>
@@ -128,7 +154,7 @@ const HowItWorksSection = () => {
 
                   {/* Step Icon */}
                   <div className="relative">
-                    <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-strong group-hover:shadow-glow transition-smooth">
+                    <div className="w-20 h-20 rounded-2xl gradient-primary flex items-center justify-center shadow-strong">
                       <Icon className="w-10 h-10 text-white" />
                     </div>
                     
@@ -140,14 +166,20 @@ const HowItWorksSection = () => {
 
                   {/* Spacer for alignment */}
                   <div className="flex-1 hidden lg:block" />
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-20 text-center animate-fade-in">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 text-center"
+        >
           <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center p-8 rounded-2xl bg-white/5 border border-white/10 shadow-soft">
             <div className="text-left">
               <h3 className="text-xl font-bold text-white mb-2">
@@ -161,7 +193,7 @@ const HowItWorksSection = () => {
               Start Free Trial →
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
