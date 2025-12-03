@@ -37,13 +37,13 @@ export const LampContainer = ({
 
         {/* Light Cone spreading downward */}
         <motion.div
-          initial={{ opacity: 0, scaleY: 0 }}
-          whileInView={{ opacity: 1, scaleY: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="absolute top-[6px] left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] h-[350px] origin-top pointer-events-none"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-[400px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 60% 100% at 50% 0%, rgba(0, 212, 255, 0.3) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%)',
+            background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(0, 212, 255, 0.25) 0%, transparent 100%)',
           }}
         />
       </div>
