@@ -20,28 +20,28 @@ const HeroSection = () => {
       id="home" 
       ref={ref}
       className="relative h-[300vh]"
-      style={{ backgroundColor: '#0a0a1a' }}
+      style={{ backgroundColor: '#0A0A0A' }}
     >
       {/* Google Gemini Effect - Neon Lines in Bottom Half */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-visible">
         {/* Hero Content - Centered */}
         <div className="flex flex-col items-center justify-center gap-6 relative z-20 text-center px-4">
           {/* Title */}
-          <h1 className="text-[64px] md:text-[72px] font-bold text-white leading-tight tracking-tight">
+          <h1 className="text-[64px] md:text-[72px] font-bold leading-tight tracking-tight text-white">
             All-in-One
           </h1>
           
           {/* Subtitle */}
-          <p className="text-[18px] md:text-[20px] max-w-[620px] mx-auto leading-relaxed text-gray-text">
+          <p className="text-[18px] md:text-[20px] max-w-[620px] mx-auto leading-relaxed text-text-body">
             Recover abandoned carts, increase LTV, automate your marketing — all in one place with intelligent automation
           </p>
           
-          {/* CTA Button */}
+          {/* CTA Button - WhatsApp Green */}
           <button 
             className="px-8 py-4 font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 mt-4 text-white"
             style={{ 
-              backgroundColor: '#5B3AF1',
-              boxShadow: '0 0 30px rgba(91, 58, 241, 0.5)'
+              backgroundColor: '#25D366',
+              boxShadow: '0 0 30px rgba(37, 211, 102, 0.4)'
             }}
           >
             Start Free Trial

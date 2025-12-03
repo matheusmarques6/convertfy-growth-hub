@@ -40,8 +40,8 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
       style={{
-        backgroundColor: isScrolled ? 'rgba(10, 10, 26, 0.95)' : 'transparent',
-        borderColor: isScrolled ? 'rgba(42, 63, 187, 0.3)' : 'transparent'
+        backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.95)' : 'transparent',
+        borderColor: isScrolled ? 'rgba(59, 130, 246, 0.2)' : 'transparent'
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +53,7 @@ const Navbar = () => {
           >
             <div 
               className="w-10 h-10 rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-smooth"
-              style={{ backgroundColor: '#5B3AF1' }}
+              style={{ backgroundColor: '#3B82F6' }}
             >
               <span className="text-white font-bold text-xl">C</span>
             </div>
@@ -126,13 +126,13 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="default" className="text-gray-text hover:text-white">
+            <Button variant="ghost" size="default" className="text-text-secondary hover:text-white">
               Login
             </Button>
             <Button 
               size="default"
-              className="text-white"
-              style={{ backgroundColor: '#5B3AF1' }}
+              className="text-white hover:opacity-90"
+              style={{ backgroundColor: '#25D366' }}
             >
               Start Free Trial
             </Button>
@@ -153,8 +153,8 @@ const Navbar = () => {
         <div 
           className="lg:hidden backdrop-blur-lg border-t animate-fade-in"
           style={{ 
-            backgroundColor: 'rgba(10, 10, 26, 0.95)',
-            borderColor: 'rgba(42, 63, 187, 0.3)'
+            backgroundColor: 'rgba(10, 10, 10, 0.95)',
+            borderColor: 'rgba(59, 130, 246, 0.2)'
           }}
         >
           <div className="container mx-auto px-4 py-6 space-y-4">
@@ -162,19 +162,19 @@ const Navbar = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="block w-full text-left py-2 text-sm font-medium text-gray-text hover:text-white transition-smooth"
+                className="block w-full text-left py-2 text-sm font-medium text-text-secondary hover:text-white transition-smooth"
               >
                 {link.label}
               </button>
             ))}
-            <div className="pt-4 space-y-3 border-t" style={{ borderColor: 'rgba(42, 63, 187, 0.3)' }}>
-              <Button variant="outline" size="default" className="w-full border-secondary/30 text-white hover:bg-white/10">
+            <div className="pt-4 space-y-3 border-t" style={{ borderColor: 'rgba(59, 130, 246, 0.2)' }}>
+              <Button variant="outline" size="default" className="w-full text-white hover:bg-white/10" style={{ borderColor: 'rgba(59, 130, 246, 0.3)' }}>
                 Login
               </Button>
               <Button 
                 size="default" 
                 className="w-full text-white"
-                style={{ backgroundColor: '#5B3AF1' }}
+                style={{ backgroundColor: '#25D366' }}
               >
                 Start Free Trial
               </Button>

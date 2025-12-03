@@ -16,11 +16,11 @@ export const LampContainer = ({
         "relative w-full flex flex-col items-center justify-center overflow-hidden py-20",
         className
       )}
-      style={{ backgroundColor: '#0a0a1a' }}
+      style={{ backgroundColor: '#0A0A0A' }}
     >
       {/* Lamp Light Effect - Centered */}
       <div className="relative w-full flex flex-col items-center justify-center">
-        {/* Solid LED Light Bar with gradient */}
+        {/* Solid LED Light Bar - Primary Blue */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0.5 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -31,8 +31,8 @@ export const LampContainer = ({
           <div 
             className="w-[50vw] max-w-[500px] min-w-[200px] h-[6px] rounded animate-lamp-pulse"
             style={{
-              background: 'linear-gradient(90deg, #2A3FBB 0%, #5B3AF1 50%, #2A3FBB 100%)',
-              boxShadow: '0 0 20px 5px rgba(91, 58, 241, 0.8), 0 0 60px 20px rgba(91, 58, 241, 0.4), 0 0 120px 50px rgba(91, 58, 241, 0.2)'
+              backgroundColor: '#3B82F6',
+              boxShadow: '0 0 20px 5px rgba(59, 130, 246, 0.8), 0 0 60px 20px rgba(59, 130, 246, 0.4), 0 0 120px 50px rgba(59, 130, 246, 0.2)'
             }}
           />
         </motion.div>
@@ -45,7 +45,7 @@ export const LampContainer = ({
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-[400px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(91, 58, 241, 0.25) 0%, transparent 100%)',
+            background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(59, 130, 246, 0.25) 0%, transparent 100%)',
           }}
         />
       </div>

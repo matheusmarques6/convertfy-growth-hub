@@ -41,8 +41,8 @@ const Footer = () => {
     <footer 
       className="text-white py-16"
       style={{ 
-        backgroundColor: '#0a0a1a',
-        borderTop: '1px solid rgba(42, 63, 187, 0.3)'
+        backgroundColor: '#0A0A0A',
+        borderTop: '1px solid rgba(59, 130, 246, 0.2)'
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,13 +53,13 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <div 
                 className="w-10 h-10 rounded-lg flex items-center justify-center shadow-soft"
-                style={{ backgroundColor: '#5B3AF1' }}
+                style={{ backgroundColor: '#3B82F6' }}
               >
                 <span className="text-white font-bold text-xl">C</span>
               </div>
               <span className="text-xl font-bold">Convertfy CRM</span>
             </div>
-            <p className="text-sm text-gray-text mb-6 max-w-sm">
+            <p className="text-sm text-text-body mb-6 max-w-sm">
               The all-in-one CRM platform for e-commerce businesses. 
               Recover more sales, increase LTV, and automate your marketing.
             </p>
@@ -74,11 +74,9 @@ const Footer = () => {
                     href={social.href}
                     aria-label={social.label}
                     className="w-10 h-10 rounded-lg flex items-center justify-center transition-smooth"
-                    style={{ 
-                      backgroundColor: 'rgba(42, 63, 187, 0.2)',
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(91, 58, 241, 0.3)'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(42, 63, 187, 0.2)'}
+                    style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.2)'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'}
                   >
                     <Icon className="w-5 h-5" />
                   </a>
@@ -96,10 +94,9 @@ const Footer = () => {
                   <li key={index}>
                     <a
                       href={link.href}
-                      className="text-sm text-gray-text hover:text-white transition-smooth"
-                      style={{ }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = '#5B3AF1'}
-                      onMouseLeave={(e) => e.currentTarget.style.color = '#707279'}
+                      className="text-sm text-text-secondary hover:text-white transition-smooth"
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#60A5FA'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
                     >
                       {link.label}
                     </a>
@@ -111,28 +108,28 @@ const Footer = () => {
         </div>
 
         {/* Newsletter */}
-        <div className="pt-8 mb-8" style={{ borderTop: '1px solid rgba(42, 63, 187, 0.3)' }}>
+        <div className="pt-8 mb-8" style={{ borderTop: '1px solid rgba(59, 130, 246, 0.2)' }}>
           <div className="max-w-md">
             <h4 className="font-semibold mb-2 flex items-center gap-2">
               <Mail className="w-5 h-5" />
               Subscribe to our newsletter
             </h4>
-            <p className="text-sm text-gray-text mb-4">
+            <p className="text-sm text-text-secondary mb-4">
               Get the latest updates, tips, and best practices delivered to your inbox.
             </p>
             <div className="flex gap-2">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-lg text-white placeholder:text-gray-text focus:outline-none transition-smooth"
+                className="flex-1 px-4 py-2 rounded-lg text-white placeholder:text-text-muted focus:outline-none transition-smooth"
                 style={{ 
-                  backgroundColor: 'rgba(42, 63, 187, 0.2)',
-                  border: '1px solid rgba(42, 63, 187, 0.3)'
+                  backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                  border: '1px solid rgba(59, 130, 246, 0.2)'
                 }}
               />
               <button 
-                className="px-6 py-2 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth whitespace-nowrap"
-                style={{ backgroundColor: '#5B3AF1' }}
+                className="px-6 py-2 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth whitespace-nowrap hover:opacity-90"
+                style={{ backgroundColor: '#25D366' }}
               >
                 Subscribe
               </button>
@@ -141,7 +138,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-text" style={{ borderTop: '1px solid rgba(42, 63, 187, 0.3)' }}>
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-secondary" style={{ borderTop: '1px solid rgba(59, 130, 246, 0.2)' }}>
           <p>
             © {currentYear} Convertfy CRM. All rights reserved.
           </p>
@@ -149,24 +146,24 @@ const Footer = () => {
             <a 
               href="#" 
               className="hover:text-white transition-smooth"
-              onMouseEnter={(e) => e.currentTarget.style.color = '#5B3AF1'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#707279'}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#60A5FA'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
             >
               Privacy
             </a>
             <a 
               href="#" 
               className="hover:text-white transition-smooth"
-              onMouseEnter={(e) => e.currentTarget.style.color = '#5B3AF1'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#707279'}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#60A5FA'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
             >
               Terms
             </a>
             <a 
               href="#" 
               className="hover:text-white transition-smooth"
-              onMouseEnter={(e) => e.currentTarget.style.color = '#5B3AF1'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#707279'}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#60A5FA'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#9CA3AF'}
             >
               Cookies
             </a>

@@ -10,61 +10,61 @@
   :root {
     /* Base Colors */
     --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --foreground: 220 9% 46%;
 
     /* Card & Surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 220 9% 46%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 220 9% 46%;
 
-    /* Primary - Purple */
-    --primary: 252 87% 59%;
+    /* Primary - Blue */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 252 87% 69%;
+    --primary-glow: 217 91% 70%;
     
-    /* Secondary - Blue */
-    --secondary: 230 65% 45%;
+    /* Secondary - Light Blue */
+    --secondary: 217 91% 68%;
     --secondary-foreground: 0 0% 100%;
     
-    /* Accent - Gold */
-    --accent: 44 94% 70%;
-    --accent-foreground: 222 47% 11%;
+    /* Accent - Purple */
+    --accent: 234 89% 74%;
+    --accent-foreground: 0 0% 100%;
     
-    /* Success - Green for metrics */
-    --success: 142 76% 36%;
+    /* Success - Green */
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
     
-    /* Muted - Gray */
-    --muted: 228 6% 47%;
-    --muted-foreground: 228 6% 47%;
+    /* CTA - WhatsApp Green */
+    --cta: 142 70% 49%;
+    --cta-foreground: 0 0% 100%;
+    
+    /* Muted */
+    --muted: 220 9% 46%;
+    --muted-foreground: 220 9% 46%;
     
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
     /* Borders & Inputs */
-    --border: 230 65% 45%;
-    --input: 230 65% 45%;
-    --ring: 252 87% 59%;
+    --border: 217 91% 60%;
+    --input: 217 91% 60%;
+    --ring: 217 91% 60%;
     
     --radius: 0.75rem;
     
-    /* Navy Background */
-    --navy: 230 82% 26%;
-    --navy-dark: 240 33% 6%;
-    
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(230 65% 45%) 0%, hsl(252 87% 59%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(230 82% 26%) 0%, hsl(240 33% 6%) 100%);
-    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(252 87% 59% / 0.2) 0%, transparent 70%);
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(234 89% 74%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(217 91% 60% / 0.2) 0%, transparent 70%);
     
     /* Shadows */
-    --shadow-soft: 0 2px 8px hsl(252 87% 59% / 0.08);
-    --shadow-medium: 0 8px 24px hsl(252 87% 59% / 0.15);
-    --shadow-strong: 0 16px 48px hsl(252 87% 59% / 0.2);
-    --shadow-glow: 0 0 40px hsl(252 87% 59% / 0.4);
+    --shadow-soft: 0 2px 8px hsl(217 91% 60% / 0.08);
+    --shadow-medium: 0 8px 24px hsl(217 91% 60% / 0.15);
+    --shadow-strong: 0 16px 48px hsl(217 91% 60% / 0.2);
+    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.4);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -72,41 +72,50 @@
   }
 
   .dark {
-    --background: 240 33% 6%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 4%;
+    --foreground: 220 13% 91%;
     
-    --card: 230 82% 26%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 4%;
+    --card-foreground: 220 13% 91%;
     
-    --popover: 230 82% 26%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 220 13% 91%;
     
-    --primary: 252 87% 59%;
+    /* Primary - Blue */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 252 87% 69%;
+    --primary-glow: 217 91% 70%;
     
-    --secondary: 230 65% 45%;
+    /* Secondary - Light Blue */
+    --secondary: 217 91% 68%;
     --secondary-foreground: 0 0% 100%;
     
-    --accent: 44 94% 70%;
-    --accent-foreground: 222 47% 11%;
+    /* Accent - Purple */
+    --accent: 234 89% 74%;
+    --accent-foreground: 0 0% 100%;
     
-    --success: 142 76% 36%;
+    /* Success - Green */
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
     
-    --muted: 228 6% 47%;
-    --muted-foreground: 228 6% 60%;
+    /* CTA - WhatsApp Green */
+    --cta: 142 70% 49%;
+    --cta-foreground: 0 0% 100%;
+    
+    /* Muted */
+    --muted: 220 9% 46%;
+    --muted-foreground: 221 9% 61%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 230 65% 45%;
-    --input: 230 65% 45%;
-    --ring: 252 87% 59%;
+    --border: 217 91% 60%;
+    --input: 217 91% 60%;
+    --ring: 217 91% 60%;
     
     /* Dark mode gradients */
-    --gradient-hero: linear-gradient(180deg, hsl(230 82% 26%) 0%, hsl(240 33% 6%) 100%);
-    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(252 87% 59% / 0.25) 0%, transparent 70%);
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(217 91% 60% / 0.25) 0%, transparent 70%);
   }
 }
 
@@ -180,10 +189,10 @@
   /* Text glow animation */
   @keyframes text-glow {
     0%, 100% { 
-      text-shadow: 0 0 20px rgba(91, 58, 241, 0.5), 0 0 40px rgba(91, 58, 241, 0.3);
+      text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
     }
     50% { 
-      text-shadow: 0 0 30px rgba(91, 58, 241, 0.7), 0 0 60px rgba(91, 58, 241, 0.4);
+      text-shadow: 0 0 30px rgba(59, 130, 246, 0.7), 0 0 60px rgba(59, 130, 246, 0.4);
     }
   }
   

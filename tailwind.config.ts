@@ -19,10 +19,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        navy: {
-          DEFAULT: "#091C7D",
-          dark: "#0a0a1a",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -48,6 +44,10 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        cta: {
+          DEFAULT: "hsl(var(--cta))",
+          foreground: "hsl(var(--cta-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -56,9 +56,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "#FAD469",
-        gray: {
-          text: "#707279",
+        // Direct color references
+        brand: {
+          blue: "#3B82F6",
+          "blue-light": "#60A5FA",
+          purple: "#818CF8",
+          green: "#25D366",
+          success: "#22C55E",
+        },
+        text: {
+          heading: "#FFFFFF",
+          body: "#E5E7EB",
+          secondary: "#9CA3AF",
+          muted: "#6B7280",
         },
       },
       fontFamily: {
