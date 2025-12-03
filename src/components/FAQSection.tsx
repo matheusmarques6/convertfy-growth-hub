@@ -34,21 +34,21 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="py-24" style={{ backgroundColor: '#0a0a1a' }}>
+    <section className="py-24" style={{ backgroundColor: '#0A0A0A' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
           <div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-soft"
-            style={{ backgroundColor: 'rgba(42, 63, 187, 0.1)', border: '1px solid rgba(42, 63, 187, 0.2)' }}
+            style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)' }}
           >
-            <span className="text-sm font-medium text-white/90">FAQ</span>
+            <span className="text-sm font-medium text-text-secondary">FAQ</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Frequently asked
-            <span className="block gradient-primary bg-clip-text text-transparent">questions</span>
+            <span className="block" style={{ color: '#3B82F6' }}>questions</span>
           </h2>
-          <p className="text-lg text-gray-text">
+          <p className="text-lg text-text-body">
             Got questions? We've got answers. Can't find what you're looking for? Contact our support team.
           </p>
         </div>
@@ -61,12 +61,12 @@ const FAQSection = () => {
                 key={index}
                 value={`item-${index}`}
                 className="rounded-xl shadow-soft hover:shadow-medium transition-smooth px-6"
-                style={{ backgroundColor: 'rgba(42, 63, 187, 0.1)', border: '1px solid rgba(42, 63, 187, 0.2)' }}
+                style={{ backgroundColor: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}
               >
-                <AccordionTrigger className="text-left font-semibold text-white hover:text-primary py-6">
+                <AccordionTrigger className="text-left font-semibold text-white hover:text-[#60A5FA] py-6">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-text leading-relaxed pb-6">
+                <AccordionContent className="text-text-body leading-relaxed pb-6">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -78,15 +78,15 @@ const FAQSection = () => {
         <div className="mt-16 text-center animate-fade-in">
           <div 
             className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl shadow-soft"
-            style={{ backgroundColor: 'rgba(42, 63, 187, 0.1)', border: '1px solid rgba(42, 63, 187, 0.2)' }}
+            style={{ backgroundColor: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}
           >
             <h3 className="text-xl font-bold text-white">Still have questions?</h3>
-            <p className="text-gray-text max-w-md">
+            <p className="text-text-secondary max-w-md">
               Our team is here to help. Get in touch and we'll respond within 24 hours.
             </p>
             <button 
-              className="px-6 py-3 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth"
-              style={{ backgroundColor: '#5B3AF1' }}
+              className="px-6 py-3 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth hover:opacity-90"
+              style={{ backgroundColor: '#25D366' }}
             >
               Contact Support
             </button>

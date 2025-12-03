@@ -37,7 +37,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" style={{ backgroundColor: '#0a0a1a' }}>
+    <section id="how-it-works" style={{ backgroundColor: '#0A0A0A' }}>
       {/* Lamp Header */}
       <LampContainer>
         <motion.div
@@ -51,26 +51,26 @@ const HowItWorksSection = () => {
           <div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{ 
-              backgroundColor: 'rgba(42, 63, 187, 0.1)',
-              border: '1px solid rgba(42, 63, 187, 0.2)'
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              border: '1px solid rgba(59, 130, 246, 0.2)'
             }}
           >
-            <span className="text-sm font-medium text-white/70">
+            <span className="text-sm font-medium text-text-secondary">
               Simple Process
             </span>
           </div>
           
           {/* Title */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-            <span className="text-[#e0e0e0]">
+            <span className="text-white">
               Get started in
             </span>
             <br />
             <motion.span 
               className="italic animate-text-glow"
               style={{
-                color: '#5B3AF1',
-                textShadow: '0 0 20px rgba(91, 58, 241, 0.5), 0 0 40px rgba(91, 58, 241, 0.3)'
+                color: '#3B82F6',
+                textShadow: '0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)'
               }}
             >
               5 easy steps
@@ -78,7 +78,7 @@ const HowItWorksSection = () => {
           </h2>
           
           {/* Subtitle */}
-          <p className="text-base sm:text-lg mt-6 max-w-xl mx-auto px-4 text-gray-text">
+          <p className="text-base sm:text-lg mt-6 max-w-xl mx-auto px-4 text-text-secondary">
             From setup to success in minutes. Our streamlined workflow gets you up and running fast, so you can focus on growing your business.
           </p>
         </motion.div>
@@ -106,13 +106,13 @@ const HowItWorksSection = () => {
                   {/* Step Content */}
                   <div className={`flex-1 ${isEven ? "lg:text-right" : "lg:text-left"}`}>
                     <div className="inline-block">
-                      <div className="text-6xl font-bold mb-2" style={{ color: 'rgba(91, 58, 241, 0.3)' }}>
+                      <div className="text-6xl font-bold mb-2" style={{ color: 'rgba(59, 130, 246, 0.3)' }}>
                         {step.number}
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-3">
                         {step.title}
                       </h3>
-                      <p className="leading-relaxed max-w-md text-gray-text">
+                      <p className="leading-relaxed max-w-md text-text-body">
                         {step.description}
                       </p>
                     </div>
@@ -122,7 +122,7 @@ const HowItWorksSection = () => {
                   <div className="relative">
                     <div 
                       className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-strong"
-                      style={{ background: 'linear-gradient(135deg, #2A3FBB 0%, #5B3AF1 100%)' }}
+                      style={{ backgroundColor: '#3B82F6' }}
                     >
                       <Icon className="w-10 h-10 text-white" />
                     </div>
@@ -131,7 +131,7 @@ const HowItWorksSection = () => {
                     {index < steps.length - 1 && (
                       <div 
                         className="hidden lg:block absolute top-full left-1/2 -translate-x-1/2 w-1 h-16"
-                        style={{ background: 'linear-gradient(180deg, #5B3AF1 0%, transparent 100%)' }}
+                        style={{ background: 'linear-gradient(180deg, #3B82F6 0%, transparent 100%)' }}
                       />
                     )}
                   </div>
@@ -155,21 +155,21 @@ const HowItWorksSection = () => {
           <div 
             className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center p-8 rounded-2xl shadow-soft"
             style={{ 
-              backgroundColor: 'rgba(42, 63, 187, 0.1)',
-              border: '1px solid rgba(42, 63, 187, 0.2)'
+              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              border: '1px solid rgba(59, 130, 246, 0.2)'
             }}
           >
             <div className="text-left">
               <h3 className="text-xl font-bold text-white mb-2">
                 Ready to get started?
               </h3>
-              <p className="text-gray-text">
+              <p className="text-text-secondary">
                 Join thousands of brands already using Convertfy
               </p>
             </div>
             <button 
-              className="px-8 py-4 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth whitespace-nowrap"
-              style={{ background: 'linear-gradient(135deg, #2A3FBB 0%, #5B3AF1 100%)' }}
+              className="px-8 py-4 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth whitespace-nowrap hover:opacity-90"
+              style={{ backgroundColor: '#25D366' }}
             >
               Start Free Trial →
             </button>
