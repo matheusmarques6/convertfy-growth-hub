@@ -1,35 +1,35 @@
-import { Database, Wand2, Send, LineChart, Repeat } from "lucide-react";
+import { ShoppingCart, MessageCircle, Zap, Rocket, BarChart3 } from "lucide-react";
 
 const steps = [
   {
-    icon: Database,
+    icon: ShoppingCart,
     number: "01",
     title: "Connect Your Store",
-    description: "Integrate your e-commerce platform in seconds. Import your data and sync your customer database automatically.",
+    description: "Integrate Shopify, WooCommerce, or Nuvemshop in seconds. Import your customers and orders automatically.",
   },
   {
-    icon: Wand2,
+    icon: MessageCircle,
     number: "02",
-    title: "Build Campaigns",
-    description: "Create email and SMS automation flows with our intuitive drag-and-drop builder or use pre-built templates.",
+    title: "Link Your WhatsApp",
+    description: "Connect your WhatsApp Business number via official Meta Cloud API. Verified, secure, and ban-free.",
   },
   {
-    icon: Send,
+    icon: Zap,
     number: "03",
-    title: "Schedule & Trigger",
-    description: "Set up automated triggers based on customer behavior or schedule campaigns for optimal engagement.",
+    title: "Build Your Flows",
+    description: "Create cart recovery, order updates, and broadcast campaigns with our drag-and-drop builder. No coding required.",
   },
   {
-    icon: LineChart,
+    icon: Rocket,
     number: "04",
-    title: "Monitor Results",
-    description: "Track real-time performance metrics, conversion rates, and revenue impact directly in your dashboard.",
+    title: "Go Live & Send",
+    description: "Launch automated messages or send broadcasts to thousands. Reach customers in 180+ countries instantly.",
   },
   {
-    icon: Repeat,
+    icon: BarChart3,
     number: "05",
-    title: "Optimize & Scale",
-    description: "Use AI-powered insights to refine your strategy, test variants, and continuously improve your results.",
+    title: "Track & Scale",
+    description: "Monitor delivery rates, conversions, and revenue recovered in real-time. Optimize and grow with data.",
   },
 ];
 
