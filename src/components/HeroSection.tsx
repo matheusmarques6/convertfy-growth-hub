@@ -1,4 +1,3 @@
-// Removed unused imports
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { useScroll, useTransform } from "framer-motion";
 import React from "react";
@@ -21,7 +20,7 @@ const HeroSection = () => {
       id="home" 
       ref={ref}
       className="relative h-[300vh]"
-      style={{ backgroundColor: '#020617' }}
+      style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}
     >
       {/* Google Gemini Effect - Neon Lines in Bottom Half */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-visible">
@@ -33,12 +32,18 @@ const HeroSection = () => {
           </h1>
           
           {/* Subtitle */}
-          <p className="text-[18px] md:text-[20px] max-w-[620px] mx-auto leading-relaxed" style={{ color: '#C8D2FF' }}>
+          <p className="text-[18px] md:text-[20px] max-w-[620px] mx-auto leading-relaxed text-gray-text">
             Recover abandoned carts, increase LTV, automate your marketing — all in one place with intelligent automation
           </p>
           
           {/* CTA Button */}
-          <button className="px-8 py-4 bg-white text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 mt-4">
+          <button 
+            className="px-8 py-4 font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 mt-4 text-white"
+            style={{ 
+              backgroundColor: '#5B3AF1',
+              boxShadow: '0 0 30px rgba(91, 58, 241, 0.5)'
+            }}
+          >
             Start Free Trial
           </button>
         </div>

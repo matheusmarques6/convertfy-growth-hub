@@ -36,9 +36,13 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-soft border-b border-border"
+          ? "backdrop-blur-lg shadow-soft border-b"
           : "bg-transparent"
       }`}
+      style={{
+        backgroundColor: isScrolled ? 'rgba(9, 28, 125, 0.9)' : 'transparent',
+        borderColor: isScrolled ? 'rgba(42, 63, 187, 0.3)' : 'transparent'
+      }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -47,7 +51,10 @@ const Navbar = () => {
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-2 group"
           >
-            <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-soft group-hover:shadow-medium transition-smooth">
+            <div 
+              className="w-10 h-10 rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-smooth"
+              style={{ backgroundColor: '#5B3AF1' }}
+            >
               <span className="text-white font-bold text-xl">C</span>
             </div>
             <span className="text-xl font-bold text-white hidden sm:block">
@@ -119,10 +126,14 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="default">
+            <Button variant="ghost" size="default" className="text-gray-text hover:text-white">
               Login
             </Button>
-            <Button variant="hero" size="default">
+            <Button 
+              size="default"
+              className="text-white"
+              style={{ backgroundColor: '#5B3AF1' }}
+            >
               Start Free Trial
             </Button>
           </div>
@@ -139,22 +150,32 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border animate-fade-in">
+        <div 
+          className="lg:hidden backdrop-blur-lg border-t animate-fade-in"
+          style={{ 
+            backgroundColor: 'rgba(9, 28, 125, 0.95)',
+            borderColor: 'rgba(42, 63, 187, 0.3)'
+          }}
+        >
           <div className="container mx-auto px-4 py-6 space-y-4">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="block w-full text-left py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-smooth"
+                className="block w-full text-left py-2 text-sm font-medium text-gray-text hover:text-white transition-smooth"
               >
                 {link.label}
               </button>
             ))}
-            <div className="pt-4 space-y-3 border-t border-border">
-              <Button variant="outline" size="default" className="w-full">
+            <div className="pt-4 space-y-3 border-t" style={{ borderColor: 'rgba(42, 63, 187, 0.3)' }}>
+              <Button variant="outline" size="default" className="w-full border-secondary/30 text-white hover:bg-white/10">
                 Login
               </Button>
-              <Button variant="hero" size="default" className="w-full">
+              <Button 
+                size="default" 
+                className="w-full text-white"
+                style={{ backgroundColor: '#5B3AF1' }}
+              >
                 Start Free Trial
               </Button>
             </div>

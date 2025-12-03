@@ -13,13 +13,14 @@ export const LampContainer = ({
   return (
     <div
       className={cn(
-        "relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#020617] py-20",
+        "relative w-full flex flex-col items-center justify-center overflow-hidden py-20",
         className
       )}
+      style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}
     >
       {/* Lamp Light Effect - Centered */}
       <div className="relative w-full flex flex-col items-center justify-center">
-        {/* Solid LED Light Bar */}
+        {/* Solid LED Light Bar with gradient */}
         <motion.div
           initial={{ opacity: 0, scaleX: 0.5 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -28,9 +29,10 @@ export const LampContainer = ({
           className="relative z-10 flex justify-center"
         >
           <div 
-            className="w-[50vw] max-w-[500px] min-w-[200px] h-[6px] rounded bg-[#00d4ff] animate-lamp-pulse"
+            className="w-[50vw] max-w-[500px] min-w-[200px] h-[6px] rounded animate-lamp-pulse"
             style={{
-              boxShadow: '0 0 20px 5px rgba(0, 212, 255, 0.8), 0 0 60px 20px rgba(0, 212, 255, 0.4), 0 0 120px 50px rgba(0, 212, 255, 0.2)'
+              background: 'linear-gradient(90deg, #2A3FBB 0%, #5B3AF1 50%, #2A3FBB 100%)',
+              boxShadow: '0 0 20px 5px rgba(91, 58, 241, 0.8), 0 0 60px 20px rgba(91, 58, 241, 0.4), 0 0 120px 50px rgba(91, 58, 241, 0.2)'
             }}
           />
         </motion.div>
@@ -43,7 +45,7 @@ export const LampContainer = ({
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-[400px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(0, 212, 255, 0.25) 0%, transparent 100%)',
+            background: 'radial-gradient(ellipse 50% 80% at 50% 0%, rgba(91, 58, 241, 0.25) 0%, transparent 100%)',
           }}
         />
       </div>
