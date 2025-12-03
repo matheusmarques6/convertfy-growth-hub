@@ -1,5 +1,6 @@
 import { ShoppingCart, MessageCircle, Zap, Rocket, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
 
 const steps = [
   {
@@ -35,91 +36,42 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
-  const title1 = "Get started in";
-  const title2 = "5 easy steps";
-
-  const letterVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        delay: i * 0.04,
-        ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
-      },
-    }),
-  };
-
   return (
-    <section id="how-it-works" className="py-24 bg-[#020617]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft mb-6"
-          >
+    <section id="how-it-works" className="bg-[#020617]">
+      {/* Lamp Header */}
+      <LampContainer className="min-h-[450px]">
+        <motion.div
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft mb-6">
             <span className="text-sm font-medium text-white/90">
               Simple Process
             </span>
-          </motion.div>
-          
-          {/* Animated Title */}
+          </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-            {/* First line - white */}
-            <span className="block text-white mb-2">
-              {title1.split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={letterVariants}
-                  className="inline-block"
-                  style={{ display: char === " " ? "inline" : "inline-block" }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+            <span className="bg-gradient-to-br from-slate-100 to-slate-300 bg-clip-text text-transparent">
+              Get started in
             </span>
-            
-            {/* Second line - italic with gradient */}
-            <span className="block italic">
-              {title2.split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  custom={i + title1.length}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={letterVariants}
-                  className="inline-block bg-gradient-to-r from-primary via-[hsl(230,80%,70%)] to-secondary bg-clip-text text-transparent"
-                  style={{ display: char === " " ? "inline" : "inline-block" }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+            <br />
+            <span className="italic bg-gradient-to-r from-primary via-[hsl(230,80%,70%)] to-secondary bg-clip-text text-transparent">
+              5 easy steps
             </span>
           </h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-lg text-white/70 mt-6 max-w-xl mx-auto"
-          >
-            From setup to success in minutes. Our streamlined workflow gets you up and running fast,
-            so you can focus on growing your business.
-          </motion.p>
-        </div>
+          <p className="text-lg text-white/60 mt-6 max-w-xl mx-auto">
+            From setup to success in minutes. Our streamlined workflow gets you up and running fast.
+          </p>
+        </motion.div>
+      </LampContainer>
 
-        {/* Steps Timeline */}
+      {/* Steps Timeline */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-5xl mx-auto">
           <div className="space-y-8">
             {steps.map((step, index) => {
