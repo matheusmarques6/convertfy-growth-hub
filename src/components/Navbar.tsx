@@ -40,7 +40,7 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
       style={{
-        backgroundColor: isScrolled ? 'rgba(9, 28, 125, 0.9)' : 'transparent',
+        backgroundColor: isScrolled ? 'rgba(10, 10, 26, 0.95)' : 'transparent',
         borderColor: isScrolled ? 'rgba(42, 63, 187, 0.3)' : 'transparent'
       }}
     >
@@ -153,7 +153,7 @@ const Navbar = () => {
         <div 
           className="lg:hidden backdrop-blur-lg border-t animate-fade-in"
           style={{ 
-            backgroundColor: 'rgba(9, 28, 125, 0.95)',
+            backgroundColor: 'rgba(10, 10, 26, 0.95)',
             borderColor: 'rgba(42, 63, 187, 0.3)'
           }}
         >

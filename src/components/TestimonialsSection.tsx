@@ -32,7 +32,7 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="py-24" style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}>
+    <section id="testimonials" className="py-24" style={{ backgroundColor: '#0a0a1a' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">

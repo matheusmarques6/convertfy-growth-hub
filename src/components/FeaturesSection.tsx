@@ -3,7 +3,7 @@ import { Radio, Blocks, Cloud, Users } from "lucide-react";
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="py-16 md:py-32" style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}>
+    <section id="features" className="py-16 md:py-32" style={{ backgroundColor: '#0a0a1a' }}>
       <div className="mx-auto max-w-5xl px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">

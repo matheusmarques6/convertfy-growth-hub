@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="py-24" style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}>
+    <section className="py-24" style={{ backgroundColor: '#0a0a1a' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative max-w-5xl mx-auto">
           {/* Background Glow Effect */}

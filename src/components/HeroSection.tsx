@@ -20,7 +20,7 @@ const HeroSection = () => {
       id="home" 
       ref={ref}
       className="relative h-[300vh]"
-      style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}
+      style={{ backgroundColor: '#0a0a1a' }}
     >
       {/* Google Gemini Effect - Neon Lines in Bottom Half */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-visible">
