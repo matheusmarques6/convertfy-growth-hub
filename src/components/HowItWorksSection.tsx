@@ -39,33 +39,40 @@ const HowItWorksSection = () => {
   return (
     <section id="how-it-works" className="bg-[#020617]">
       {/* Lamp Header */}
-      <LampContainer className="min-h-[450px]">
+      <LampContainer>
         <motion.div
-          initial={{ opacity: 0.5, y: 100 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 shadow-soft mb-6">
-            <span className="text-sm font-medium text-white/90">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <span className="text-sm font-medium text-white/70">
               Simple Process
             </span>
           </div>
+          
+          {/* Title */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-            <span className="bg-gradient-to-br from-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <span className="text-[#e0e0e0]">
               Get started in
             </span>
             <br />
-            <span className="italic bg-gradient-to-r from-primary via-[hsl(230,80%,70%)] to-secondary bg-clip-text text-transparent">
+            <motion.span 
+              className="italic text-[#00d4ff] animate-text-glow"
+              style={{
+                textShadow: '0 0 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3)'
+              }}
+            >
               5 easy steps
-            </span>
+            </motion.span>
           </h2>
-          <p className="text-lg text-white/60 mt-6 max-w-xl mx-auto">
-            From setup to success in minutes. Our streamlined workflow gets you up and running fast.
+          
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-[#808080] mt-6 max-w-xl mx-auto px-4">
+            From setup to success in minutes. Our streamlined workflow gets you up and running fast, so you can focus on growing your business.
           </p>
         </motion.div>
       </LampContainer>
