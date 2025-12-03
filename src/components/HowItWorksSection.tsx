@@ -37,7 +37,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}>
+    <section id="how-it-works" style={{ backgroundColor: '#0a0a1a' }}>
       {/* Lamp Header */}
       <LampContainer>
         <motion.div

@@ -41,7 +41,7 @@ const Footer = () => {
     <footer 
       className="text-white py-16"
       style={{ 
-        backgroundColor: '#091C7D',
+        backgroundColor: '#0a0a1a',
         borderTop: '1px solid rgba(42, 63, 187, 0.3)'
       }}
     >

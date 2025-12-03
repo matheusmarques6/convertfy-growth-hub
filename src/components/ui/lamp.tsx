@@ -16,7 +16,7 @@ export const LampContainer = ({
         "relative w-full flex flex-col items-center justify-center overflow-hidden py-20",
         className
       )}
-      style={{ background: 'linear-gradient(180deg, #091C7D 0%, #0a0a1a 100%)' }}
+      style={{ backgroundColor: '#0a0a1a' }}
     >
       {/* Lamp Light Effect - Centered */}
       <div className="relative w-full flex flex-col items-center justify-center">
