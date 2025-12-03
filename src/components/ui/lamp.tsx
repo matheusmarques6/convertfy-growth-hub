@@ -35,24 +35,15 @@ export const LampContainer = ({
           />
         </motion.div>
 
-        {/* Light Cone/Glow spreading downward */}
+        {/* Light Cone/Glow spreading downward - smooth gradient only */}
         <motion.div
           initial={{ opacity: 0, scaleY: 0 }}
           whileInView={{ opacity: 1, scaleY: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="absolute top-0 w-[300px] sm:w-[450px] md:w-[600px] h-[250px] origin-top"
+          className="absolute top-0 w-[500px] sm:w-[600px] md:w-[800px] h-[300px] origin-top"
           style={{
-            background: 'linear-gradient(180deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 212, 255, 0.1) 30%, transparent 100%)',
-            clipPath: 'polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)',
-          }}
-        />
-
-        {/* Soft ambient glow */}
-        <div 
-          className="absolute top-0 w-[400px] sm:w-[500px] md:w-[700px] h-[200px] opacity-40"
-          style={{
-            background: 'radial-gradient(ellipse at center top, rgba(0, 212, 255, 0.4) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse 50% 100% at 50% 0%, rgba(0, 212, 255, 0.25) 0%, rgba(0, 212, 255, 0.08) 40%, transparent 70%)',
           }}
         />
       </div>
