@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Lock, User, Chrome, ShieldPlus, Loader2, Phone } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
@@ -20,16 +21,25 @@ const Register = () => {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [acceptPolicy, setAcceptPolicy] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearError();
 
-    // Validações
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !mobile) {
       toast({
         title: "Campos obrigatórios",
-        description: "Por favor, preencha nome, email e senha",
+        description: "Preencha nome, email, telefone e senha",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!acceptPolicy) {
+      toast({
+        title: "Termos não aceitos",
+        description: "Aceite os termos para continuar",
         variant: "destructive",
       });
       return;
@@ -38,7 +48,6 @@ const Register = () => {
     if (password !== confirmPassword) {
       toast({
         title: "Senhas não conferem",
-        description: "A senha e confirmação devem ser iguais",
         variant: "destructive",
       });
       return;
@@ -47,179 +56,78 @@ const Register = () => {
     if (password.length < 6) {
       toast({
         title: "Senha muito curta",
-        description: "A senha deve ter pelo menos 6 caracteres",
+        description: "Mínimo 6 caracteres",
         variant: "destructive",
       });
       return;
     }
 
-    const success = await register(name, email, password, mobile || undefined);
+    const success = await register(name, email, password, mobile);
 
     if (success) {
       toast({
         title: "Conta criada!",
-        description: "Bem-vindo ao WhatsCRM. Sua conta foi criada com sucesso.",
+        description: "Agora escolha o plano ideal para você",
       });
-      navigate("/dashboard", { replace: true });
+      // Redirecionar para página de planos para escolher plano
+      navigate("/plans", { replace: true });
     } else {
       toast({
         title: "Erro ao criar conta",
-        description: error || "Verifique os dados e tente novamente",
+        description: error || "Tente novamente",
         variant: "destructive",
       });
     }
   };
 
-  const handleGoogleRegister = async () => {
-    toast({
-      title: "Em breve",
-      description: "Registro com Google será disponibilizado em breve",
-    });
-  };
-
   return (
     <AuthLayout
       title="Crie sua conta"
-      subtitle="Teste gratuito para explorar inbox, bots, flow builder e disparos de campanha."
-      sideNote={
-        <div className="flex items-center gap-2">
-          <ShieldPlus className="h-4 w-4" />
-          Verificação por email e MFA disponível
-        </div>
-      }
+      subtitle="Teste gratuito"
       footer={
-        <>
-          <span>
-            Já possui conta?{" "}
-            <Link to="/login" className="text-primary hover:text-white">
-              Fazer login
-            </Link>
-          </span>
-          <Link to="/reset-password" className="text-primary hover:text-white">
-            Recuperar senha
-          </Link>
-        </>
+        <span>
+          Já possui conta? <Link to="/login" className="text-primary hover:text-white">Fazer login</Link>
+        </span>
       }
     >
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-sm text-white">
-              Nome completo
-            </Label>
-            <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3">
-              <User className="h-4 w-4 text-muted-foreground" />
-              <Input
-                id="name"
-                placeholder="Maria Costa"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                disabled={isLoading}
-                className="border-none bg-transparent text-white placeholder:text-muted-foreground focus-visible:ring-primary"
-              />
-            </div>
+            <Label htmlFor="name" className="text-sm text-white">Nome</Label>
+            <Input id="name" value={name} onChange={(e) => setName(e.target.value)} disabled={isLoading} placeholder="Seu nome" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm text-white">
-              Email
-            </Label>
-            <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3">
-              <Mail className="h-4 w-4 text-muted-foreground" />
-              <Input
-                id="email"
-                type="email"
-                placeholder="contato@empresa.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
-                className="border-none bg-transparent text-white placeholder:text-muted-foreground focus-visible:ring-primary"
-              />
-            </div>
+            <Label htmlFor="email" className="text-sm text-white">Email</Label>
+            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={isLoading} placeholder="seu@email.com" />
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="mobile" className="text-sm text-white">
-            Telefone (opcional)
-          </Label>
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3">
-            <Phone className="h-4 w-4 text-muted-foreground" />
-            <Input
-              id="mobile"
-              type="tel"
-              placeholder="+55 11 99999-9999"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-              disabled={isLoading}
-              className="border-none bg-transparent text-white placeholder:text-muted-foreground focus-visible:ring-primary"
-            />
-          </div>
+          <Label htmlFor="mobile" className="text-sm text-white">Telefone</Label>
+          <Input id="mobile" type="tel" value={mobile} onChange={(e) => setMobile(e.target.value)} disabled={isLoading} placeholder="5511999999999" />
+          <p className="text-xs text-muted-foreground">Ex: 5511999999999</p>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-sm text-white">
-            Senha
-          </Label>
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3">
-            <Lock className="h-4 w-4 text-muted-foreground" />
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={isLoading}
-              className="border-none bg-transparent text-white placeholder:text-muted-foreground focus-visible:ring-primary"
-            />
-          </div>
+          <Label htmlFor="password" className="text-sm text-white">Senha</Label>
+          <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={isLoading} />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword" className="text-sm text-white">
-            Confirmar senha
-          </Label>
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3">
-            <Lock className="h-4 w-4 text-muted-foreground" />
-            <Input
-              id="confirmPassword"
-              type="password"
-              placeholder="Repita a senha"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              disabled={isLoading}
-              className="border-none bg-transparent text-white placeholder:text-muted-foreground focus-visible:ring-primary"
-            />
-          </div>
+          <Label htmlFor="confirmPassword" className="text-sm text-white">Confirmar</Label>
+          <Input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={isLoading} />
         </div>
 
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className="w-full rounded-xl bg-cta text-white shadow-glow hover:opacity-90"
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Criando conta...
-            </>
-          ) : (
-            "Criar conta"
-          )}
+        <div className="flex items-start gap-2">
+          <Checkbox id="terms" checked={acceptPolicy} onCheckedChange={(c) => setAcceptPolicy(c as boolean)} disabled={isLoading} />
+          <Label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer">
+            Aceito os termos e políticas
+          </Label>
+        </div>
+
+        <Button type="submit" disabled={isLoading} className="w-full rounded-xl bg-cta text-white shadow-glow">
+          {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Criando...</> : "Criar conta"}
         </Button>
-
-        <div className="space-y-3">
-          <Separator className="bg-white/10" />
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleGoogleRegister}
-            disabled={isLoading}
-            className="w-full rounded-xl border-primary/30 bg-primary/5 text-white hover:bg-primary/10"
-          >
-            <Chrome className="mr-2 h-4 w-4" />
-            Registrar com Google
-          </Button>
-        </div>
       </form>
     </AuthLayout>
   );

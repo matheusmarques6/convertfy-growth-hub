@@ -1,7 +1,19 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 
 const CTASection = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuthStore();
+
+  const handleStartTrial = () => {
+    if (isAuthenticated) {
+      logout();
+    }
+    navigate('/register');
+  };
+
   return (
     <section className="py-24" style={{ backgroundColor: '#0A0A0A' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,21 +73,23 @@ const CTASection = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="group text-white px-8 py-6 text-lg hover:opacity-90"
                   style={{ backgroundColor: '#25D366' }}
+                  onClick={handleStartTrial}
                 >
                   Start Free Trial
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-smooth" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="text-white px-8 py-6 text-lg"
                   style={{ borderColor: 'rgba(59, 130, 246, 0.3)', backgroundColor: 'transparent' }}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                  onClick={handleStartTrial}
                 >
                   Schedule a Demo
                 </Button>

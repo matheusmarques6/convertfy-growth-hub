@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { Check, Sparkles } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 
 const plans = [
   {
@@ -57,6 +59,16 @@ const plans = [
 ];
 
 const PricingSection = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuthStore();
+
+  const handleStartTrial = () => {
+    if (isAuthenticated) {
+      logout();
+    }
+    navigate('/register');
+  };
+
   return (
     <section id="pricing" className="py-24" style={{ backgroundColor: '#0A0A0A' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,6 +148,7 @@ const PricingSection = () => {
                 size="lg"
                 className="w-full mb-8 text-white hover:opacity-90"
                 style={{ backgroundColor: '#25D366' }}
+                onClick={handleStartTrial}
               >
                 {plan.cta}
               </Button>

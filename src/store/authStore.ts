@@ -103,7 +103,13 @@ export const useAuthStore = create<AuthState>()(
       register: async (name: string, email: string, password: string, mobile?: string) => {
         set({ isLoading: true, error: null });
         try {
-          const response = await authService.register({ name, email, password, mobile });
+          const response = await authService.register({
+            name,
+            email,
+            password,
+            mobile_with_country_code: mobile,
+            acceptPolicy: true,
+          });
 
           if (response.success && response.token) {
             set({

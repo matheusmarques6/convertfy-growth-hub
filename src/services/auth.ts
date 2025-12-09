@@ -42,7 +42,7 @@ export const authService = {
 
   // Registro de novo usuário
   async register(data: RegisterData): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>('/user/register', data);
+    const response = await api.post<AuthResponse>('/user/signup', data);
 
     if (response.data.success && response.data.token) {
       setAuthToken(response.data.token);

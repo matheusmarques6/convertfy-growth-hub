@@ -92,13 +92,153 @@ export interface Flow {
   createdAt: string;
 }
 
+// Tipos de nós do Flow Builder (WhatsCRM)
+export type FlowNodeType =
+  // Nó inicial (obrigatório)
+  | 'INITIAL'
+  // Mensagens
+  | 'SEND_MESSAGE'
+  // Ferramentas
+  | 'CONDITION'
+  | 'RESPONSE_SAVER'
+  | 'MAKE_REQUEST'
+  | 'DELAY'
+  | 'ASSIGN_AGENT'
+  | 'AGENT_TRANSFER'
+  | 'DISABLE_AUTOREPLY'
+  | 'SPREADSHEET'
+  | 'DATABASE_QUERY'
+  // Add-ons
+  | 'AI_TRANSFER'
+  // Legado (compatibilidade)
+  | 'SEND_EMAIL'
+  | 'ADD_TO_PHONEBOOK'
+  | 'ADD_TAGS'
+  | 'ADD_NOTE'
+  | 'PAUSE'
+  | 'JUMP';
+
+// Tipos de mensagem para SEND_MESSAGE node
+export type MessageType = 'text' | 'image' | 'video' | 'audio' | 'document' | 'button' | 'list' | 'location';
+
+// Conteúdo da mensagem
+export interface MessageContent {
+  type: MessageType | 'interactive';
+  text?: {
+    preview_url?: boolean;
+    body: string;
+  };
+  image?: {
+    link: string;
+    caption?: string;
+  };
+  video?: {
+    link: string;
+    caption?: string;
+  };
+  audio?: {
+    link: string;
+  };
+  document?: {
+    link: string;
+    filename?: string;
+  };
+  location?: {
+    latitude: number;
+    longitude: number;
+    name?: string;
+    address?: string;
+  };
+  interactive?: {
+    type: 'button' | 'list';
+    header?: { type: string; text?: string };
+    body: { text: string };
+    footer?: { text: string };
+    action: {
+      buttons?: Array<{ type: string; reply: { id: string; title: string } }>;
+      button?: string;
+      sections?: Array<{ title: string; rows: Array<{ id: string; title: string; description?: string }> }>;
+    };
+  };
+}
+
+// Condição para CONDITION node
+export interface FlowCondition {
+  type: 'text_contains' | 'text_exact' | 'text_starts_with' | 'text_ends_with' |
+        'number_equals' | 'number_greater' | 'number_less' | 'number_between';
+  value: string;
+  value2?: string; // Para number_between
+  targetNodeId: string;
+  name: string;
+  caseSensitive?: boolean;
+}
+
+// Dados do nó (estrutura flexível)
+export interface FlowNodeData {
+  moveToNextNode?: boolean;
+  type?: { type: string; title: string };
+  content?: MessageContent;
+  // Para CONDITION
+  conditions?: FlowCondition[];
+  variable?: { message: string; active: boolean };
+  // Para RESPONSE_SAVER
+  variables?: Array<{ varName: string; responsePath: string }>;
+  // Para MAKE_REQUEST
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  url?: string;
+  headers?: Array<{ key: string; value: string }>;
+  bodyData?: { json?: Array<{ key: string; value: string }> };
+  contentType?: string;
+  // Para DELAY
+  seconds?: string;
+  duration?: number;
+  timeUnit?: 'hours' | 'minutes' | 'seconds';
+  message?: string;
+  // Para AGENT_TRANSFER
+  agentData?: { id: number; uid: string; name: string; email: string };
+  autoAgentSelect?: boolean;
+  // Para AI_TRANSFER
+  provider?: {
+    id: string;
+    model: { id: string; name: string };
+    apiKey: string;
+    temperature?: number;
+    maxTokens?: number;
+    systemPrompt?: string;
+  };
+  assignedToAi?: boolean;
+  aiTask?: { active: boolean; functions: Array<{ name: string; id: string }> };
+  // Para SPREADSHEET
+  authUrl?: string;
+  authLabel?: string;
+  jsonData?: Record<string, string>;
+  sheetName?: string;
+  sheetId?: string;
+  // Para DATABASE_QUERY
+  connection?: {
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    database: string;
+    ssl?: boolean;
+  };
+  query?: string;
+  // Para DISABLE_AUTOREPLY
+  hours?: number;
+  minutes?: number;
+}
+
 // Flow Data (nós do fluxo)
 export interface FlowNode {
   id: string;
-  type: 'SEND_MESSAGE' | 'CONDITION' | 'RESPONSE_SAVER' | 'MAKE_REQUEST' | 'SEND_EMAIL' |
-        'ADD_TO_PHONEBOOK' | 'ADD_TAGS' | 'ADD_NOTE' | 'ASSIGN_AGENT' | 'PAUSE' | 'JUMP';
+  type: FlowNodeType;
   position: { x: number; y: number };
-  data: Record<string, unknown>;
+  width?: number;
+  height?: number;
+  data: FlowNodeData;
+  selected?: boolean;
+  dragging?: boolean;
 }
 
 export interface FlowEdge {
@@ -107,6 +247,9 @@ export interface FlowEdge {
   target: string;
   sourceHandle?: string;
   targetHandle?: string;
+  type?: string;
+  animated?: boolean;
+  style?: Record<string, unknown>;
 }
 
 export interface FlowData {
@@ -233,7 +376,8 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
-  mobile?: string;
+  mobile_with_country_code?: string;
+  acceptPolicy?: boolean;
 }
 
 export interface AuthResponse {

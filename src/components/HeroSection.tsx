@@ -1,8 +1,12 @@
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { useScroll, useTransform } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store/authStore";
 import React from "react";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuthStore();
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,9 +41,16 @@ const HeroSection = () => {
           </p>
           
           {/* CTA Button - WhatsApp Green */}
-          <button 
-            className="px-8 py-4 font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 mt-4 text-white"
-            style={{ 
+          <button
+            onClick={() => {
+              // Se já está logado, faz logout primeiro para permitir novo registro
+              if (isAuthenticated) {
+                logout();
+              }
+              navigate('/register');
+            }}
+            className="px-8 py-4 font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200 mt-4 text-white cursor-pointer"
+            style={{
               backgroundColor: '#25D366',
               boxShadow: '0 0 30px rgba(37, 211, 102, 0.4)'
             }}

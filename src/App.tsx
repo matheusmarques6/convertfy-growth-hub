@@ -35,6 +35,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminPlans from "./pages/admin/AdminPlans";
 import AdminSettings from "./pages/admin/AdminSettings";
+import OnboardingStores from "./pages/onboarding/OnboardingStores";
+import OnboardingStoreDetails from "./pages/onboarding/OnboardingStoreDetails";
+import OnboardingAutomations from "./pages/onboarding/OnboardingAutomations";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,10 +80,15 @@ const App = () => (
             path="/reset-password"
             element={
               <PublicRoute>
-                <ResetPassword />
-              </PublicRoute>
+              <ResetPassword />
+            </PublicRoute>
             }
           />
+
+          {/* Onboarding */}
+          <Route path="/onboarding/stores" element={<OnboardingStores />} />
+          <Route path="/onboarding/stores/new" element={<OnboardingStoreDetails />} />
+          <Route path="/onboarding/stores/new/automations" element={<OnboardingAutomations />} />
 
           {/* Rotas protegidas (requer autenticação) */}
           <Route

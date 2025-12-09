@@ -1,154 +1,224 @@
 import api from './api';
-import { ApiResponse, Flow, FlowData } from '@/types/api';
+import { ApiResponse, FlowNode, FlowEdge } from '@/types/api';
+
+// Interface para BetaFlow (estrutura real do WhatsCRM)
+export interface BetaFlow {
+  id: number;
+  uid: string;
+  flow_id: string;
+  source: 'wa_chatbot' | 'webhook_flow';
+  name: string;
+  data: {
+    nodes: FlowNode[];
+    edges: FlowEdge[];
+  };
+  is_active: number;
+  createdAt: string;
+}
+
+// Interface para Flow legado
+export interface LegacyFlow {
+  id: number;
+  uid: string;
+  flow_id: string;
+  title: string;
+  prevent_list?: string;
+  ai_list?: string;
+  createdAt: string;
+}
+
+// Interface para sessão de flow
+export interface FlowSession {
+  id: number;
+  uid: string;
+  origin: 'qr' | 'meta' | 'webhook';
+  origin_id: string;
+  flow_id: string;
+  sender_mobile: string;
+  data: string; // JSON stringified session state
+  createdAt: string;
+}
 
 export const flowService = {
-  // Listar todos os fluxos
-  async getFlows(): Promise<ApiResponse<Flow[]>> {
-    const response = await api.get<ApiResponse<Flow[]>>('/chat_flow/get');
+  // ===== BETA FLOWS (Sistema novo) =====
+
+  // Listar flows beta por tipo
+  async getBetaFlows(type: 'wa_chatbot' | 'webhook_flow' = 'wa_chatbot'): Promise<ApiResponse<BetaFlow[]>> {
+    const response = await api.get<ApiResponse<BetaFlow[]>>('/chat_flow/get_flows_beta', {
+      params: { type }
+    });
     return response.data;
   },
 
-  // Obter fluxo específico
-  async getFlow(flowId: string): Promise<ApiResponse<Flow & { flow_data: FlowData }>> {
-    const response = await api.get<ApiResponse<Flow & { flow_data: FlowData }>>(
-      `/chat_flow/get/${flowId}`
+  // Criar ou atualizar flow beta
+  async saveBetaFlow(data: {
+    name: string;
+    flow_id: string;
+    source: 'wa_chatbot' | 'webhook_flow';
+    data: {
+      nodes: FlowNode[];
+      edges: FlowEdge[];
+    };
+  }): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/insert_flow_beta', {
+      name: data.name,
+      flow_id: data.flow_id,
+      source: data.source,
+      data: data.data,
+    });
+    return response.data;
+  },
+
+  // Deletar flow beta
+  async deleteBetaFlow(id: number): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/del_flow_beta', { id });
+    return response.data;
+  },
+
+  // ===== LEGACY FLOWS (Sistema antigo) =====
+
+  // Listar flows do usuário (legado)
+  async getMyFlows(): Promise<ApiResponse<LegacyFlow[]>> {
+    const response = await api.get<ApiResponse<LegacyFlow[]>>('/chat_flow/get_mine');
+    return response.data;
+  },
+
+  // Buscar nodes e edges de um flow específico (legado)
+  async getFlowById(flowId: string): Promise<ApiResponse<{ nodes: FlowNode[]; edges: FlowEdge[] }>> {
+    const response = await api.post<ApiResponse<{ nodes: FlowNode[]; edges: FlowEdge[] }>>(
+      '/chat_flow/get_by_flow_id',
+      { flowId }
     );
     return response.data;
   },
 
-  // Criar novo fluxo
-  async createFlow(data: {
-    name: string;
-    trigger_on?: 'keyword' | 'all' | 'none';
-    trigger_value?: string;
-    for_meta?: boolean;
-    for_qr?: boolean;
-    qr_id?: string;
-  }): Promise<ApiResponse<{ flow_id: string }>> {
-    const response = await api.post<ApiResponse<{ flow_id: string }>>('/chat_flow/add', {
-      name: data.name,
-      trigger_on: data.trigger_on,
-      trigger_value: data.trigger_value,
-      for_meta: data.for_meta ? 1 : 0,
-      for_qr: data.for_qr ? 1 : 0,
-      qr_id: data.qr_id,
+  // Salvar flow legado (nodes + edges em arquivos JSON)
+  async saveLegacyFlow(data: {
+    title: string;
+    flowId: string;
+    nodes: FlowNode[];
+    edges: FlowEdge[];
+  }): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/add_new', {
+      title: data.title,
+      flowId: data.flowId,
+      nodes: data.nodes,
+      edges: data.edges,
     });
     return response.data;
   },
 
-  // Atualizar fluxo (metadados)
-  async updateFlow(
+  // Deletar flow legado
+  async deleteLegacyFlow(id: number, flowId: string): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/del_flow', { id, flowId });
+    return response.data;
+  },
+
+  // ===== FLOW SESSIONS =====
+
+  // Buscar sessões de um flow
+  async getFlowSessions(flow_id: string): Promise<ApiResponse<FlowSession[]>> {
+    const response = await api.post<ApiResponse<FlowSession[]>>(
+      '/chat_flow/get_beta_flow_sessions',
+      { flow_id }
+    );
+    return response.data;
+  },
+
+  // Deletar sessão
+  async deleteFlowSession(id: number): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/del_flow_sess', { id });
+    return response.data;
+  },
+
+  // Deletar múltiplas sessões
+  async deleteMultipleFlowSessions(ids: number[]): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/del_multiple_flow_sess', { ids });
+    return response.data;
+  },
+
+  // Resetar chat desabilitado
+  async resetDisabledChat(id: number): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/reset_dc_sess', { id });
+    return response.data;
+  },
+
+  // ===== FLOW ACTIVITY =====
+
+  // Buscar atividade do flow (prevent_list e ai_list)
+  async getFlowActivity(flowId: string): Promise<ApiResponse<{
+    prevent: Array<{ senderNumber: string; id: string }>;
+    ai: Array<{ senderNumber: string; id: string }>;
+  }>> {
+    const response = await api.post<ApiResponse<{
+      prevent: Array<{ senderNumber: string; id: string }>;
+      ai: Array<{ senderNumber: string; id: string }>;
+    }>>('/chat_flow/get_activity', { flowId });
+    return response.data;
+  },
+
+  // Remover número da atividade
+  async removeNumberFromActivity(
     flowId: string,
-    data: Partial<{
-      name: string;
-      active: boolean;
-      trigger_on: 'keyword' | 'all' | 'none';
-      trigger_value: string;
-      for_meta: boolean;
-      for_qr: boolean;
-      qr_id: string;
-    }>
+    number: string,
+    type: 'AI' | 'DISABLED'
   ): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/chat_flow/update', {
-      flow_id: flowId,
-      name: data.name,
-      active: data.active !== undefined ? (data.active ? 1 : 0) : undefined,
-      trigger_on: data.trigger_on,
-      trigger_value: data.trigger_value,
-      for_meta: data.for_meta !== undefined ? (data.for_meta ? 1 : 0) : undefined,
-      for_qr: data.for_qr !== undefined ? (data.for_qr ? 1 : 0) : undefined,
-      qr_id: data.qr_id,
+    const response = await api.post<ApiResponse>('/chat_flow/remove_number_from_activity', {
+      flowId,
+      number,
+      type,
     });
     return response.data;
   },
 
-  // Salvar dados do fluxo (nós e conexões)
-  async saveFlowData(flowId: string, flowData: FlowData): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/chat_flow/save-data', {
-      flow_id: flowId,
-      flow_data: JSON.stringify(flowData),
-    });
+  // ===== TESTING =====
+
+  // Testar requisição HTTP (para nó MAKE_REQUEST)
+  async testHttpRequest(data: {
+    method: string;
+    url: string;
+    headers?: Array<{ key: string; value: string }>;
+    body?: unknown;
+  }): Promise<ApiResponse> {
+    const response = await api.post<ApiResponse>('/chat_flow/make_request_try_beta', { data });
     return response.data;
   },
 
-  // Excluir fluxo
-  async deleteFlow(flowId: string): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/chat_flow/delete', { flow_id: flowId });
+  // Testar conexão MySQL (para nó DATABASE_QUERY)
+  async testDatabaseConnection(data: {
+    connection: {
+      host: string;
+      port: number;
+      username: string;
+      password: string;
+      database: string;
+      ssl?: boolean;
+    };
+    query: string;
+  }): Promise<ApiResponse<{ data: unknown[] }>> {
+    const response = await api.post<ApiResponse<{ data: unknown[] }>>('/chat_flow/try_con', { data });
     return response.data;
   },
 
-  // Duplicar fluxo
-  async duplicateFlow(flowId: string, newName: string): Promise<ApiResponse<{ flow_id: string }>> {
-    const response = await api.post<ApiResponse<{ flow_id: string }>>('/chat_flow/duplicate', {
-      flow_id: flowId,
-      name: newName,
-    });
-    return response.data;
+  // ===== HELPERS =====
+
+  // Gerar ID único para flow
+  generateFlowId(): string {
+    return `flow_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
   },
 
-  // Ativar/Desativar fluxo
-  async toggleFlow(flowId: string, active: boolean): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/chat_flow/toggle', {
-      flow_id: flowId,
-      active: active ? 1 : 0,
-    });
-    return response.data;
+  // Gerar ID único para nó
+  generateNodeId(): string {
+    return `${Date.now()}`;
   },
 
-  // Obter estatísticas do fluxo
-  async getFlowStats(flowId: string): Promise<
-    ApiResponse<{
-      total_executions: number;
-      successful_executions: number;
-      failed_executions: number;
-      average_duration: number;
-    }>
-  > {
-    const response = await api.get<
-      ApiResponse<{
-        total_executions: number;
-        successful_executions: number;
-        failed_executions: number;
-        average_duration: number;
-      }>
-    >(`/chat_flow/stats/${flowId}`);
-    return response.data;
-  },
-
-  // Testar fluxo (executar em modo de teste)
-  async testFlow(
-    flowId: string,
-    testData: { phone: string; message: string }
-  ): Promise<ApiResponse<{ result: unknown }>> {
-    const response = await api.post<ApiResponse<{ result: unknown }>>('/chat_flow/test', {
-      flow_id: flowId,
-      phone: testData.phone,
-      message: testData.message,
-    });
-    return response.data;
-  },
-
-  // Obter sessões ativas do fluxo
-  async getActiveSessions(flowId: string): Promise<
-    ApiResponse<
-      Array<{
-        session_id: string;
-        chat_id: string;
-        current_node: string;
-        started_at: string;
-      }>
-    >
-  > {
-    const response = await api.get<
-      ApiResponse<
-        Array<{
-          session_id: string;
-          chat_id: string;
-          current_node: string;
-          started_at: string;
-        }>
-      >
-    >(`/chat_flow/sessions/${flowId}`);
-    return response.data;
+  // Criar nó inicial padrão
+  createInitialNode(): FlowNode {
+    return {
+      id: 'initialNode',
+      type: 'INITIAL',
+      position: { x: 100, y: 300 },
+      data: {},
+    };
   },
 };

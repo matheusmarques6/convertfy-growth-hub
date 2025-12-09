@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu as MenuIcon, X } from "lucide-react";
 import { Menu, MenuItem, HoveredLink } from "@/components/ui/navbar-menu";
+import { useAuthStore } from "@/store/authStore";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuthStore();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+
+  const handleStartTrial = () => {
+    if (isAuthenticated) {
+      logout();
+    }
+    navigate('/register');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,13 +137,19 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="default" className="text-text-secondary hover:text-white">
+            <Button
+              variant="ghost"
+              size="default"
+              className="text-text-secondary hover:text-white"
+              onClick={() => navigate('/login')}
+            >
               Login
             </Button>
-            <Button 
+            <Button
               size="default"
               className="text-white hover:opacity-90"
               style={{ backgroundColor: '#25D366' }}
+              onClick={handleStartTrial}
             >
               Start Free Trial
             </Button>
@@ -168,13 +185,20 @@ const Navbar = () => {
               </button>
             ))}
             <div className="pt-4 space-y-3 border-t" style={{ borderColor: 'rgba(59, 130, 246, 0.2)' }}>
-              <Button variant="outline" size="default" className="w-full text-white hover:bg-white/10" style={{ borderColor: 'rgba(59, 130, 246, 0.3)' }}>
+              <Button
+                variant="outline"
+                size="default"
+                className="w-full text-white hover:bg-white/10"
+                style={{ borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                onClick={() => navigate('/login')}
+              >
                 Login
               </Button>
-              <Button 
-                size="default" 
+              <Button
+                size="default"
                 className="w-full text-white"
                 style={{ backgroundColor: '#25D366' }}
+                onClick={handleStartTrial}
               >
                 Start Free Trial
               </Button>
