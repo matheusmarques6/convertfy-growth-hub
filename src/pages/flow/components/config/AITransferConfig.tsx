@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Bot, Info, Sparkles } from 'lucide-react';
+import { CredentialSelector } from '@/components/flow/CredentialSelector';
 
 interface AITransferConfigProps {
   node: Node;
@@ -11,11 +12,14 @@ interface AITransferConfigProps {
 }
 
 export function AITransferConfig({ node, onUpdate }: AITransferConfigProps) {
-  const [assignedToAi, setAssignedToAi] = useState(node.data?.assignedToAi ?? true);
+  const data = node.data as Record<string, unknown> | undefined;
+
+  const [assignedToAi, setAssignedToAi] = useState((data?.assignedToAi as boolean) ?? true);
   const [messageReferenceCount, setMessageReferenceCount] = useState<number>(
-    node.data?.messageReferenceCount || 10
+    (data?.messageReferenceCount as number) || 10
   );
-  const [moveToNextNode, setMoveToNextNode] = useState(node.data?.moveToNextNode ?? false);
+  const [moveToNextNode, setMoveToNextNode] = useState((data?.moveToNextNode as boolean) ?? false);
+  const [credentialId, setCredentialId] = useState<string | null>((data?.credentialId as string) || null);
 
   useEffect(() => {
     onUpdate(node.id, {
@@ -23,8 +27,9 @@ export function AITransferConfig({ node, onUpdate }: AITransferConfigProps) {
       assignedToAi,
       messageReferenceCount,
       moveToNextNode,
+      credentialId,
     });
-  }, [assignedToAi, messageReferenceCount, moveToNextNode]);
+  }, [assignedToAi, messageReferenceCount, moveToNextNode, credentialId]);
 
   return (
     <div className="space-y-4">
@@ -103,23 +108,14 @@ export function AITransferConfig({ node, onUpdate }: AITransferConfigProps) {
         </div>
       </div>
 
-      {/* Supported Providers */}
-      <div className="p-3 bg-gray-800/50 rounded-lg">
-        <Label className="text-xs text-gray-400 mb-2 block">Supported AI Providers</Label>
-        <div className="flex flex-wrap gap-2">
-          {['OpenAI', 'Gemini', 'Deepseek', 'Custom'].map((provider) => (
-            <span
-              key={provider}
-              className="px-2 py-1 text-xs bg-gray-700 text-gray-300 rounded"
-            >
-              {provider}
-            </span>
-          ))}
-        </div>
-        <p className="text-xs text-gray-500 mt-2">
-          Configure AI provider in Settings → Integrations
-        </p>
-      </div>
+      {/* OpenAI Credential */}
+      <CredentialSelector
+        label="Credencial OpenAI"
+        credentialType="openai_api"
+        selectedId={credentialId}
+        onChange={setCredentialId}
+        description="Selecione sua API Key da OpenAI para usar GPT"
+      />
 
       {/* Warning */}
       <div className="p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">

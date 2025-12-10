@@ -12,7 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, MessageCircle } from 'lucide-react';
+import { CredentialSelector } from '@/components/flow/CredentialSelector';
 
 interface SendMessageConfigProps {
   node: Node;
@@ -32,43 +33,51 @@ interface ListSection {
 }
 
 export function SendMessageConfig({ node, onUpdate }: SendMessageConfigProps) {
+  const data = node.data as Record<string, unknown> | undefined;
+  const content = data?.content as Record<string, unknown> | undefined;
+  const typeData = data?.type as Record<string, unknown> | undefined;
+
   const [messageType, setMessageType] = useState<MessageType>(
-    node.data?.content?.type || node.data?.type?.type || 'text'
+    (content?.type as MessageType) || (typeData?.type as MessageType) || 'text'
   );
-  const [textBody, setTextBody] = useState(node.data?.content?.text?.body || '');
-  const [previewUrl, setPreviewUrl] = useState(node.data?.content?.text?.preview_url || false);
-  const [mediaLink, setMediaLink] = useState(
-    node.data?.content?.image?.link ||
-    node.data?.content?.video?.link ||
-    node.data?.content?.document?.link ||
-    node.data?.content?.audio?.link ||
+  const [textBody, setTextBody] = useState<string>((content?.text as Record<string, unknown>)?.body as string || '');
+  const [previewUrl, setPreviewUrl] = useState<boolean>((content?.text as Record<string, unknown>)?.preview_url as boolean || false);
+  const [mediaLink, setMediaLink] = useState<string>(
+    (content?.image as Record<string, unknown>)?.link as string ||
+    (content?.video as Record<string, unknown>)?.link as string ||
+    (content?.document as Record<string, unknown>)?.link as string ||
+    (content?.audio as Record<string, unknown>)?.link as string ||
     ''
   );
-  const [mediaCaption, setMediaCaption] = useState(
-    node.data?.content?.image?.caption ||
-    node.data?.content?.video?.caption ||
-    node.data?.content?.document?.caption ||
+  const [mediaCaption, setMediaCaption] = useState<string>(
+    (content?.image as Record<string, unknown>)?.caption as string ||
+    (content?.video as Record<string, unknown>)?.caption as string ||
+    (content?.document as Record<string, unknown>)?.caption as string ||
     ''
   );
+  const interactive = content?.interactive as Record<string, unknown> | undefined;
+  const action = interactive?.action as Record<string, unknown> | undefined;
   const [buttons, setButtons] = useState<ButtonItem[]>(
-    node.data?.content?.interactive?.action?.buttons?.map((b: { reply: ButtonItem }) => b.reply) ||
+    (action?.buttons as Array<{ reply: ButtonItem }>)?.map((b) => b.reply) ||
     [{ id: '1', title: 'Button 1' }]
   );
   const [listSections, setListSections] = useState<ListSection[]>(
-    node.data?.content?.interactive?.action?.sections ||
+    (action?.sections as ListSection[]) ||
     [{ title: 'Section 1', rows: [{ id: '1', title: 'Item 1' }] }]
   );
-  const [moveToNextNode, setMoveToNextNode] = useState(node.data?.moveToNextNode ?? true);
+  const [moveToNextNode, setMoveToNextNode] = useState<boolean>((data?.moveToNextNode as boolean) ?? true);
+  const [credentialId, setCredentialId] = useState<string | null>((data?.credentialId as string) || null);
 
   useEffect(() => {
-    const content = buildContent();
+    const builtContent = buildContent();
     onUpdate(node.id, {
       ...node.data,
-      content,
+      content: builtContent,
       type: { type: messageType, title: messageType },
       moveToNextNode,
+      credentialId,
     });
-  }, [messageType, textBody, previewUrl, mediaLink, mediaCaption, buttons, listSections, moveToNextNode]);
+  }, [messageType, textBody, previewUrl, mediaLink, mediaCaption, buttons, listSections, moveToNextNode, credentialId]);
 
   const buildContent = () => {
     switch (messageType) {
@@ -159,9 +168,26 @@ export function SendMessageConfig({ node, onUpdate }: SendMessageConfigProps) {
 
   return (
     <div className="space-y-4">
+      {/* WhatsApp Credential */}
+      <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center gap-3">
+        <MessageCircle className="w-8 h-8 text-green-400" />
+        <div>
+          <p className="text-sm font-medium text-green-300">Enviar Mensagem WhatsApp</p>
+          <p className="text-xs text-green-400/80">Envie mensagens via WhatsApp Business API</p>
+        </div>
+      </div>
+
+      <CredentialSelector
+        label="Conta WhatsApp"
+        credentialType="whatsapp_api"
+        selectedId={credentialId}
+        onChange={setCredentialId}
+        description="Selecione a conta do WhatsApp Business para enviar mensagens"
+      />
+
       {/* Message Type */}
       <div className="space-y-2">
-        <Label className="text-gray-300">Message Type</Label>
+        <Label className="text-gray-300">Tipo de Mensagem</Label>
         <Select value={messageType} onValueChange={(v) => setMessageType(v as MessageType)}>
           <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
             <SelectValue />

@@ -81,13 +81,13 @@ export const authService = {
 
   // Obter perfil do usuário autenticado
   async getProfile(): Promise<ApiResponse<User>> {
-    const response = await api.get<ApiResponse<User>>('/user/get-profile');
+    const response = await api.get<ApiResponse<User>>('/user/get_me');
     return response.data;
   },
 
   // Atualizar perfil do usuário
   async updateProfile(data: Partial<User>): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/user/update-profile', data);
+    const response = await api.post<ApiResponse>('/user/update_profile', data);
     return response.data;
   },
 

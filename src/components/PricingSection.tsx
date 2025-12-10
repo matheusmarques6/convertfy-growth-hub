@@ -74,9 +74,9 @@ const PricingSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in">
-          <div 
+          <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-soft"
-            style={{ 
+            style={{
               backgroundColor: 'rgba(59, 130, 246, 0.1)',
               border: '1px solid rgba(59, 130, 246, 0.2)'
             }}
@@ -106,7 +106,7 @@ const PricingSection = () => {
                   ? "scale-105 lg:scale-110"
                   : "hover:shadow-medium"
               }`}
-              style={{ 
+              style={{
                 backgroundColor: 'rgba(59, 130, 246, 0.05)',
                 border: plan.popular ? '2px solid #3B82F6' : '1px solid rgba(59, 130, 246, 0.2)',
                 animationDelay: `${index * 100}ms`
@@ -115,7 +115,7 @@ const PricingSection = () => {
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div 
+                  <div
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-medium text-white"
                     style={{ backgroundColor: '#3B82F6' }}
                   >

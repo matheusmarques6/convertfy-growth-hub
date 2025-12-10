@@ -111,17 +111,10 @@ export const useAuthStore = create<AuthState>()(
             acceptPolicy: true,
           });
 
-          if (response.success && response.token) {
-            set({
-              token: response.token,
-              isAuthenticated: true,
-              isLoading: false,
-            });
-
-            await get().fetchProfile();
-            connectSocket();
-
-            return true;
+          if (response.success) {
+            // Backend signup não retorna token, fazer login automático
+            const loginSuccess = await get().login(email, password);
+            return loginSuccess;
           } else {
             set({
               error: response.msg || 'Erro ao criar conta',

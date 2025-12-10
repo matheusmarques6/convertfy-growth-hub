@@ -19,6 +19,7 @@ import ResetPassword from "./pages/public/ResetPassword";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Inbox from "./pages/inbox/Inbox";
 import Chatbots from "./pages/chatbots/Chatbots";
+import FlowsList from "./pages/flows/FlowsList";
 import FlowBuilder from "./pages/flow/FlowBuilder";
 import Broadcast from "./pages/broadcast/Broadcast";
 import CampaignDetail from "./pages/broadcast/CampaignDetail";
@@ -112,6 +113,14 @@ const App = () => (
             element={
               <PrivateRoute>
                 <Chatbots />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/flows"
+            element={
+              <PrivateRoute>
+                <FlowsList />
               </PrivateRoute>
             }
           />

@@ -1,6 +1,7 @@
 import { ShoppingCart, MessageCircle, Zap, Rocket, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { LampContainer } from "@/components/ui/lamp";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   {
@@ -36,6 +37,7 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="how-it-works" style={{ backgroundColor: '#0A0A0A' }}>
       {/* Lamp Header */}
@@ -167,9 +169,10 @@ const HowItWorksSection = () => {
                 Join thousands of brands already using Convertfy
               </p>
             </div>
-            <button 
+            <button
               className="px-8 py-4 text-white font-semibold rounded-lg shadow-medium hover:shadow-strong transition-smooth whitespace-nowrap hover:opacity-90"
               style={{ backgroundColor: '#25D366' }}
+              onClick={() => navigate('/register')}
             >
               Start Free Trial →
             </button>

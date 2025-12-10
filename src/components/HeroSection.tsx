@@ -20,8 +20,8 @@ const HeroSection = () => {
   const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
 
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       ref={ref}
       className="relative h-[300vh]"
       style={{ backgroundColor: '#0A0A0A' }}
@@ -34,12 +34,12 @@ const HeroSection = () => {
           <h1 className="text-[64px] md:text-[72px] font-bold leading-tight tracking-tight text-white">
             All-in-One
           </h1>
-          
+
           {/* Subtitle */}
           <p className="text-[18px] md:text-[20px] max-w-[620px] mx-auto leading-relaxed text-text-body">
             Recover abandoned carts, increase LTV, automate your marketing — all in one place with intelligent automation
           </p>
-          
+
           {/* CTA Button - WhatsApp Green */}
           <button
             onClick={() => {

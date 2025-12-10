@@ -62,7 +62,7 @@ const Navbar = () => {
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-2 group"
           >
-            <div 
+            <div
               className="w-10 h-10 rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-smooth"
               style={{ backgroundColor: '#3B82F6' }}
             >
@@ -167,9 +167,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="lg:hidden backdrop-blur-lg border-t animate-fade-in"
-          style={{ 
+          style={{
             backgroundColor: 'rgba(10, 10, 10, 0.95)',
             borderColor: 'rgba(59, 130, 246, 0.2)'
           }}

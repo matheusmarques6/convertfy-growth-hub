@@ -19,23 +19,23 @@ const CTASection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative max-w-5xl mx-auto">
           {/* Background Glow Effect */}
-          <div 
+          <div
             className="absolute inset-0 rounded-3xl -z-10 animate-glow"
             style={{ background: 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 70%)' }}
           />
-          
+
           {/* CTA Card */}
-          <div 
+          <div
             className="relative rounded-3xl p-12 md:p-16 shadow-strong overflow-hidden"
             style={{ backgroundColor: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}
           >
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 opacity-10 rounded-full blur-3xl -z-10" style={{ background: '#3B82F6' }} />
             <div className="absolute bottom-0 left-0 w-64 h-64 opacity-10 rounded-full blur-3xl -z-10" style={{ background: '#818CF8' }} />
-            
+
             <div className="relative z-10 text-center space-y-8 animate-fade-in">
               {/* Badge */}
-              <div 
+              <div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full shadow-soft"
                 style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)' }}
               >
@@ -50,7 +50,7 @@ const CTASection = () => {
                   <span className="block" style={{ color: '#3B82F6' }}>e-commerce business?</span>
                 </h2>
                 <p className="text-xl text-text-body max-w-2xl mx-auto">
-                  Join 10,000+ brands using Convertfy to recover abandoned carts, 
+                  Join 10,000+ brands using Convertfy to recover abandoned carts,
                   increase customer lifetime value, and automate their marketing.
                 </p>
               </div>

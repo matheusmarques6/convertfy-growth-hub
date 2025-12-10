@@ -13,7 +13,12 @@ import {
   PauseCircle,
   Table,
   Database,
+  MessageCircle,
+  Webhook,
+  Calendar,
+  Zap,
 } from 'lucide-react';
+import { triggerConfigs, TriggerType } from '../nodes/triggers/types';
 
 interface NodeTemplate {
   type: string;
@@ -21,57 +26,99 @@ interface NodeTemplate {
   description: string;
   icon: React.ElementType;
   color: string;
-  category: 'message' | 'tool' | 'addon';
+  category: 'trigger' | 'message' | 'tool' | 'addon';
+  subType?: string;
 }
+
+// Trigger templates
+const triggerTemplates: NodeTemplate[] = [
+  {
+    type: 'TRIGGER_MESSAGE',
+    label: 'Mensagem WhatsApp',
+    description: 'Inicia quando recebe mensagem',
+    icon: MessageCircle,
+    color: 'green',
+    category: 'trigger',
+  },
+  {
+    type: 'TRIGGER_WEBHOOK',
+    label: 'Webhook',
+    description: 'Inicia por chamada HTTP',
+    icon: Webhook,
+    color: 'orange',
+    category: 'trigger',
+  },
+  {
+    type: 'TRIGGER_SCHEDULE',
+    label: 'Agendamento',
+    description: 'Inicia em horário programado',
+    icon: Calendar,
+    color: 'purple',
+    category: 'trigger',
+  },
+  {
+    type: 'TRIGGER_EVENT',
+    label: 'Evento',
+    description: 'Inicia por evento do sistema',
+    icon: Zap,
+    color: 'blue',
+    category: 'trigger',
+  },
+];
 
 const nodeTemplates: NodeTemplate[] = [
   // Messages
   {
     type: 'SEND_MESSAGE',
-    label: 'Text Message',
-    description: 'Send a text message',
+    label: 'Texto',
+    description: 'Enviar mensagem de texto',
     icon: MessageSquare,
     color: 'blue',
     category: 'message',
+    subType: 'text',
   },
   {
     type: 'SEND_MESSAGE',
-    label: 'Image',
-    description: 'Send an image',
+    label: 'Imagem',
+    description: 'Enviar uma imagem',
     icon: Image,
     color: 'blue',
     category: 'message',
+    subType: 'image',
   },
   {
     type: 'SEND_MESSAGE',
-    label: 'Document',
-    description: 'Send a document',
+    label: 'Documento',
+    description: 'Enviar um documento',
     icon: FileText,
     color: 'blue',
     category: 'message',
+    subType: 'document',
   },
   {
     type: 'SEND_MESSAGE',
-    label: 'Buttons',
-    description: 'Send interactive buttons',
+    label: 'Botões',
+    description: 'Enviar botões interativos',
     icon: MousePointer,
     color: 'blue',
     category: 'message',
+    subType: 'buttons',
   },
   {
     type: 'SEND_MESSAGE',
-    label: 'List',
-    description: 'Send a list menu',
+    label: 'Lista',
+    description: 'Enviar menu de lista',
     icon: List,
     color: 'blue',
     category: 'message',
+    subType: 'list',
   },
 
   // Tools
   {
     type: 'CONDITION',
-    label: 'Condition',
-    description: 'Branch based on conditions',
+    label: 'Condição',
+    description: 'Ramificar baseado em condições',
     icon: GitBranch,
     color: 'yellow',
     category: 'tool',
@@ -79,39 +126,39 @@ const nodeTemplates: NodeTemplate[] = [
   {
     type: 'DELAY',
     label: 'Delay',
-    description: 'Wait before next action',
+    description: 'Aguardar antes da próxima ação',
     icon: Clock,
     color: 'purple',
     category: 'tool',
   },
   {
     type: 'MAKE_REQUEST',
-    label: 'HTTP Request',
-    description: 'Call external APIs',
+    label: 'Requisição HTTP',
+    description: 'Chamar APIs externas',
     icon: Globe,
     color: 'cyan',
     category: 'tool',
   },
   {
     type: 'RESPONSE_SAVER',
-    label: 'Save Response',
-    description: 'Save user input as variable',
+    label: 'Salvar Resposta',
+    description: 'Salvar input como variável',
     icon: Save,
     color: 'emerald',
     category: 'tool',
   },
   {
     type: 'AGENT_TRANSFER',
-    label: 'Transfer to Agent',
-    description: 'Assign to human agent',
+    label: 'Transferir Agente',
+    description: 'Atribuir a agente humano',
     icon: UserCheck,
     color: 'orange',
     category: 'tool',
   },
   {
     type: 'DISABLE_AUTOREPLY',
-    label: 'Disable Auto-Reply',
-    description: 'Pause bot temporarily',
+    label: 'Desativar Auto-Resposta',
+    description: 'Pausar bot temporariamente',
     icon: PauseCircle,
     color: 'gray',
     category: 'tool',
@@ -119,15 +166,15 @@ const nodeTemplates: NodeTemplate[] = [
   {
     type: 'SPREADSHEET',
     label: 'Google Sheets',
-    description: 'Save data to spreadsheet',
+    description: 'Salvar dados na planilha',
     icon: Table,
     color: 'green',
     category: 'tool',
   },
   {
     type: 'DATABASE_QUERY',
-    label: 'Database Query',
-    description: 'Execute SQL query',
+    label: 'Query MySQL',
+    description: 'Executar query SQL',
     icon: Database,
     color: 'indigo',
     category: 'tool',
@@ -136,8 +183,8 @@ const nodeTemplates: NodeTemplate[] = [
   // Add-ons
   {
     type: 'AI_TRANSFER',
-    label: 'AI Assistant',
-    description: 'Transfer to AI bot',
+    label: 'Assistente IA',
+    description: 'Transferir para bot IA',
     icon: Bot,
     color: 'pink',
     category: 'addon',
@@ -179,6 +226,43 @@ export function NodePanel({ onDragStart }: NodePanelProps) {
   const toolNodes = nodeTemplates.filter((n) => n.category === 'tool');
   const addonNodes = nodeTemplates.filter((n) => n.category === 'addon');
 
+  const renderTriggerNode = (node: NodeTemplate) => {
+    const Icon = node.icon;
+    const config = triggerConfigs[node.type as TriggerType];
+
+    return (
+      <div
+        key={node.type}
+        className="p-3 rounded-xl border-2 cursor-grab transition-all duration-200 hover:scale-[1.02]"
+        style={{
+          backgroundColor: `${config.color}15`,
+          borderColor: `${config.color}60`,
+        }}
+        draggable
+        onDragStart={(e) => onDragStart(e, node.type)}
+      >
+        <div className="flex items-center gap-2">
+          <div
+            className="p-1.5 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: config.color }}
+          >
+            <Zap className="w-3 h-3 text-white" />
+          </div>
+          <div
+            className="p-1.5 rounded-lg"
+            style={{ backgroundColor: `${config.color}30` }}
+          >
+            <Icon className="w-3.5 h-3.5" style={{ color: config.color }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-medium text-white truncate">{node.label}</div>
+            <div className="text-[10px] text-gray-400 truncate">{node.description}</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderNode = (node: NodeTemplate) => {
     const Icon = node.icon;
     return (
@@ -190,7 +274,7 @@ export function NodePanel({ onDragStart }: NodePanelProps) {
           transition-all duration-200 hover:scale-[1.02]
         `}
         draggable
-        onDragStart={(e) => onDragStart(e, node.type, node.label.toLowerCase())}
+        onDragStart={(e) => onDragStart(e, node.type, node.subType || node.label.toLowerCase())}
       >
         <div className="flex items-center gap-2">
           <div className={`p-1.5 rounded-md ${iconColorClasses[node.color]}`}>
@@ -207,11 +291,22 @@ export function NodePanel({ onDragStart }: NodePanelProps) {
 
   return (
     <div className="w-64 bg-gray-900 border-r border-gray-800 p-4 overflow-y-auto">
-      <h3 className="text-sm font-semibold text-white mb-4">Add Nodes</h3>
+      <h3 className="text-sm font-semibold text-white mb-4">Adicionar Nós</h3>
+
+      {/* Triggers */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-2">
+          <Zap className="w-3.5 h-3.5 text-yellow-400" />
+          <h4 className="text-xs font-medium text-yellow-400 uppercase">Gatilhos</h4>
+        </div>
+        <div className="space-y-2">
+          {triggerTemplates.map(renderTriggerNode)}
+        </div>
+      </div>
 
       {/* Messages */}
       <div className="mb-6">
-        <h4 className="text-xs font-medium text-gray-400 uppercase mb-2">Messages</h4>
+        <h4 className="text-xs font-medium text-gray-400 uppercase mb-2">Mensagens</h4>
         <div className="space-y-2">
           {messageNodes.map(renderNode)}
         </div>
@@ -219,7 +314,7 @@ export function NodePanel({ onDragStart }: NodePanelProps) {
 
       {/* Tools */}
       <div className="mb-6">
-        <h4 className="text-xs font-medium text-gray-400 uppercase mb-2">Tools</h4>
+        <h4 className="text-xs font-medium text-gray-400 uppercase mb-2">Ferramentas</h4>
         <div className="space-y-2">
           {toolNodes.map(renderNode)}
         </div>

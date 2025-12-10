@@ -13,7 +13,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Plus, Trash2, Globe, Info } from 'lucide-react';
+import { Plus, Trash2, Globe, Info, Lock } from 'lucide-react';
+import { CredentialSelector } from '@/components/flow/CredentialSelector';
+
+type AuthType = 'none' | 'basic' | 'bearer' | 'api_key';
 
 interface MakeRequestConfigProps {
   node: Node;
@@ -41,25 +44,32 @@ interface ResponseVariable {
 }
 
 export function MakeRequestConfig({ node, onUpdate }: MakeRequestConfigProps) {
-  const [method, setMethod] = useState<HttpMethod>(node.data?.method || 'GET');
-  const [url, setUrl] = useState<string>(node.data?.url || '');
+  const data = node.data as Record<string, unknown> | undefined;
+  const bodyData = data?.bodyData as { json?: BodyField[]; raw?: string } | undefined;
+
+  const [method, setMethod] = useState<HttpMethod>((data?.method as HttpMethod) || 'GET');
+  const [url, setUrl] = useState<string>((data?.url as string) || '');
   const [headers, setHeaders] = useState<Header[]>(
-    node.data?.headers || [{ key: '', value: '', enabled: true }]
+    (data?.headers as Header[]) || [{ key: '', value: '', enabled: true }]
   );
   const [contentType, setContentType] = useState<ContentType>(
-    node.data?.contentType || 'application/json'
+    (data?.contentType as ContentType) || 'application/json'
   );
   const [bodyInputMode, setBodyInputMode] = useState<'visual' | 'raw'>(
-    node.data?.bodyInputMode || 'visual'
+    (data?.bodyInputMode as 'visual' | 'raw') || 'visual'
   );
   const [bodyFields, setBodyFields] = useState<BodyField[]>(
-    node.data?.bodyData?.json || [{ key: '', value: '', enabled: true }]
+    bodyData?.json || [{ key: '', value: '', enabled: true }]
   );
-  const [rawBody, setRawBody] = useState<string>(node.data?.bodyData?.raw || '');
+  const [rawBody, setRawBody] = useState<string>(bodyData?.raw || '');
   const [responseVariables, setResponseVariables] = useState<ResponseVariable[]>(
-    node.data?.variables || [{ key: '', value: '' }]
+    (data?.variables as ResponseVariable[]) || [{ key: '', value: '' }]
   );
-  const [moveToNextNode, setMoveToNextNode] = useState(node.data?.moveToNextNode ?? true);
+  const [moveToNextNode, setMoveToNextNode] = useState<boolean>((data?.moveToNextNode as boolean) ?? true);
+
+  // Authentication state
+  const [authType, setAuthType] = useState<AuthType>((data?.authType as AuthType) || 'none');
+  const [credentialId, setCredentialId] = useState<string | null>((data?.credentialId as string) || null);
 
   useEffect(() => {
     onUpdate(node.id, {
@@ -75,8 +85,10 @@ export function MakeRequestConfig({ node, onUpdate }: MakeRequestConfigProps) {
       },
       variables: responseVariables.filter((v) => v.key.trim() !== ''),
       moveToNextNode,
+      authType,
+      credentialId,
     });
-  }, [method, url, headers, contentType, bodyInputMode, bodyFields, rawBody, responseVariables, moveToNextNode]);
+  }, [method, url, headers, contentType, bodyInputMode, bodyFields, rawBody, responseVariables, moveToNextNode, authType, credentialId]);
 
   const addHeader = () => {
     setHeaders([...headers, { key: '', value: '', enabled: true }]);
@@ -167,9 +179,13 @@ export function MakeRequestConfig({ node, onUpdate }: MakeRequestConfigProps) {
         </p>
       </div>
 
-      {/* Tabs for Headers, Body, Response */}
-      <Tabs defaultValue="headers" className="w-full">
+      {/* Tabs for Auth, Headers, Body, Response */}
+      <Tabs defaultValue="auth" className="w-full">
         <TabsList className="w-full bg-gray-800">
+          <TabsTrigger value="auth" className="flex-1">
+            <Lock className="w-3 h-3 mr-1" />
+            Auth
+          </TabsTrigger>
           <TabsTrigger value="headers" className="flex-1">
             Headers
           </TabsTrigger>
@@ -180,6 +196,49 @@ export function MakeRequestConfig({ node, onUpdate }: MakeRequestConfigProps) {
             Response
           </TabsTrigger>
         </TabsList>
+
+        {/* Auth Tab */}
+        <TabsContent value="auth" className="space-y-3 mt-3">
+          <div className="space-y-2">
+            <Label className="text-gray-300">Tipo de Autenticação</Label>
+            <Select value={authType} onValueChange={(v) => setAuthType(v as AuthType)}>
+              <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-gray-800 border-gray-700">
+                <SelectItem value="none">Sem Autenticação</SelectItem>
+                <SelectItem value="basic">HTTP Basic Auth</SelectItem>
+                <SelectItem value="bearer">Bearer Token</SelectItem>
+                <SelectItem value="api_key">API Key</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {authType !== 'none' && (
+            <CredentialSelector
+              label="Credential"
+              credentialType={
+                authType === 'basic'
+                  ? 'http_basic'
+                  : authType === 'bearer'
+                  ? 'http_bearer'
+                  : 'http_api_key'
+              }
+              selectedId={credentialId}
+              onChange={setCredentialId}
+              description="Selecione uma credential salva ou crie uma nova"
+            />
+          )}
+
+          {authType === 'none' && (
+            <div className="p-3 bg-gray-800/50 rounded-lg text-xs text-gray-400">
+              <p>Nenhuma autenticação será enviada com a requisição.</p>
+              <p className="mt-1">
+                Para adicionar headers de autenticação manualmente, use a aba Headers.
+              </p>
+            </div>
+          )}
+        </TabsContent>
 
         {/* Headers Tab */}
         <TabsContent value="headers" className="space-y-2 mt-3">
